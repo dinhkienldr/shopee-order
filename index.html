@@ -417,6 +417,13 @@
         }
       }
     }
+
+    // Lắng nghe sự kiện chuyển tab từ web con (khi khách bấm nút ĐẶT ĐƠN HỘ)
+    window.addEventListener('message', function(event) {
+      if (event.data && event.data.action === 'switchTab') {
+        switchTab(event.data.tab);
+      }
+    });
   </script>
 </body>
 </html>
