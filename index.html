@@ -3,14 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Hệ Thống Đặt Đơn Hộ & Tra Cứu Vận Đơn - ma100.xyz</title>
+  <title>Hệ Thống Dịch Vụ Shopee - ma100.xyz</title>
 
   <!-- Tối ưu tốc độ: Bắt tay DNS & SSL với các máy chủ -->
   <link rel="preconnect" href="https://script.google.com" crossorigin>
   <link rel="preconnect" href="https://script.googleusercontent.com" crossorigin>
-  <link rel="preconnect" href="https://dinhkienldr.github.io" crossorigin>
   <link rel="dns-prefetch" href="https://script.google.com">
-  <link rel="dns-prefetch" href="https://dinhkienldr.github.io">
 
   <!-- Favicon -->
   <link rel="icon" href="https://deo.shopeemobile.com/chem/desktop/vi/favicon.ico" type="image/x-icon">
@@ -40,7 +38,7 @@
     }
 
     /* ============================================================
-       THANH ĐIỀU HƯỚNG 2 MỤC ĐẦU TRANG - DẠNG NÚT BẤM NỔI BẬT
+       THANH ĐIỀU HƯỚNG 2 MỤC ĐẦU TRANG - TRÊN CÙNG
        ============================================================ */
     .top-nav-bar {
       position: fixed;
@@ -54,7 +52,7 @@
       justify-content: center;
       box-shadow: 0 3px 12px rgba(0,0,0,0.08);
       border-bottom: 1.5px solid #edf2f7;
-      z-index: 10000;
+      z-index: 999999;
       padding: 0 12px;
     }
 
@@ -88,6 +86,12 @@
       transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
       letter-spacing: 0.2px;
       user-select: none;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .nav-tab-btn * {
+      pointer-events: none;
     }
 
     .nav-tab-btn i {
@@ -116,7 +120,6 @@
     /* ============================================================
        HIỆU ỨNG ĐỘNG CHO 2 TAB ĐỂ THU HÚT SỰ CHÚ Ý CỦA KHÁCH
        ============================================================ */
-    /* 1. Hiệu ứng động Xe Tải (Tab Tra Cứu) */
     .truck-icon-anim {
       display: inline-block;
       animation: driveTruck 2.2s infinite ease-in-out;
@@ -131,7 +134,6 @@
       80% { transform: translateY(0); }
     }
 
-    /* 2. Hiệu ứng động Giỏ Hàng (Tab Đặt Đơn - Kích hoạt khi khách ở Tab Tra Cứu) */
     .cart-bounce-anim {
       display: inline-block;
       animation: cartWiggle 1.8s infinite ease-in-out;
@@ -179,7 +181,7 @@
     }
 
     /* ============================================================
-       KHUNG HIỂN THỊ NỘI DUNG (NẰM DƯỚI THANH MENU - KHÔNG BỊ CHE)
+       KHUNG HIỂN THỊ NỘI DUNG (GIỮ TRẠNG THÁI TRONG BỘ NHỚ CHO MOBILE)
        ============================================================ */
     .app-viewport {
       position: fixed;
@@ -197,26 +199,19 @@
       left: 0;
       width: 100%;
       height: 100%;
-      display: none;
+      visibility: hidden;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 1;
       background: #f8fafc;
+      transition: opacity 0.15s ease;
     }
 
     .app-frame-wrap.active {
-      display: block;
-    }
-
-    /* Tab Đặt Đơn */
-    #wrap-order {
-      top: -36px;
-      height: calc(100% + 36px);
-      padding-top: 10px;
-    }
-
-    /* Tab Tra Cứu: Đẩy xuống thoáng đãng, tuyệt đối không bị chạm đỉnh */
-    #wrap-tracking {
-      top: 0;
-      height: 100%;
-      padding-top: 12px;
+      visibility: visible;
+      opacity: 1;
+      pointer-events: auto;
+      z-index: 2;
     }
 
     iframe {
@@ -239,7 +234,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      z-index: 99999;
+      z-index: 9999;
       transition: opacity 0.3s ease, visibility 0.3s ease;
     }
 
@@ -306,6 +301,13 @@
       50% { left: 30%; width: 60%; }
       100% { left: 100%; width: 40%; }
     }
+
+    @media (max-width: 480px) {
+      .nav-tab-btn {
+        font-size: 12.5px;
+        gap: 5px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -319,7 +321,7 @@
     </div>
   </div>
 
-  <!-- THANH ĐIỀU HƯỚNG 2 MỤC: DẠNG BUTTON NỔI BẬT & CÓ HIỆU ỨNG ĐỘNG QUA LẠI -->
+  <!-- THANH ĐIỀU HƯỚNG 2 MỤC ĐẦU TRANG (VỊ TRÍ CŨ TRÊN CÙNG) -->
   <header class="top-nav-bar">
     <div class="nav-pill-box">
       <!-- 1. Nút Đặt Hộ Đơn -->
@@ -351,14 +353,13 @@
       </iframe>
     </div>
 
-    <!-- 2. Web App Tra Cứu Đơn Hàng (Link GitHub Pages Cố Định) -->
+    <!-- 2. Web App Tra Cứu Đơn Hàng (Link Apps Script Thật) -->
     <div class="app-frame-wrap" id="wrap-tracking">
       <iframe 
         id="frame-tracking"
-        src="" 
-        data-src="https://dinhkienldr.github.io/tracking/"
+        src="https://script.google.com/macros/s/AKfycbzPi0dI6GMkcRrEsyJ8aqlCmSKkXW3X7Z-GEJQlfxNUTeH5dwFDc36vqOrb2C9TZ08e/exec" 
         allow="clipboard-write; clipboard-read"
-        loading="lazy">
+        loading="eager">
       </iframe>
     </div>
   </main>
@@ -379,7 +380,6 @@
       const tabTracking = document.getElementById('tab-tracking');
       const wrapOrder = document.getElementById('wrap-order');
       const wrapTracking = document.getElementById('wrap-tracking');
-      const frameTracking = document.getElementById('frame-tracking');
       const cartIcon = document.getElementById('cart-icon');
       const truckIcon = document.getElementById('truck-icon');
       const badgeOrder = document.getElementById('badge-order');
@@ -411,12 +411,19 @@
 
         cartIcon.classList.add('cart-bounce-anim');
         badgeOrder.style.display = 'inline-block';
-
-        if (!frameTracking.getAttribute('src')) {
-          frameTracking.setAttribute('src', frameTracking.getAttribute('data-src'));
-        }
       }
     }
+
+    // Hỗ trợ cảm ứng chạm tức thì (Zero-delay) trên màn hình điện thoại
+    ['tab-order', 'tab-tracking'].forEach(function(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.addEventListener('touchend', function(e) {
+          e.preventDefault();
+          switchTab(id === 'tab-order' ? 'order' : 'tracking');
+        }, { passive: false });
+      }
+    });
 
     // Lắng nghe sự kiện chuyển tab từ web con (khi khách bấm nút ĐẶT ĐƠN HỘ)
     window.addEventListener('message', function(event) {
