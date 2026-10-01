@@ -19,6 +19,7 @@
     :root {
       --primary: #ee4d2d;
       --nav-height: 58px;
+      --content-gap: 36px;
       --bg-color: #f8fafc;
     }
 
@@ -185,10 +186,10 @@
        ============================================================ */
     .app-viewport {
       position: fixed;
-      top: var(--nav-height);
+      top: calc(var(--nav-height) + var(--content-gap));
       left: 0;
       width: 100%;
-      height: calc(100% - var(--nav-height));
+      height: calc(100% - var(--nav-height) - var(--content-gap));
       overflow: hidden;
       background: #f8fafc;
     }
@@ -303,6 +304,9 @@
     }
 
     @media (max-width: 480px) {
+      :root {
+        --content-gap: 32px;
+      }
       .nav-tab-btn {
         font-size: 12.5px;
         gap: 5px;
