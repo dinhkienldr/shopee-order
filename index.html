@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Hệ Thống Dịch Vụ Shopee - ma100.xyz</title>
+  <title>Hệ Thống Đặt Hộ Đơn & Tra Cứu Vận Đơn Shopee - ma100.xyz</title>
 
   <!-- Tối ưu tốc độ: Bắt tay DNS & SSL với các máy chủ -->
   <link rel="preconnect" href="https://script.google.com" crossorigin>
@@ -102,9 +102,17 @@
 
     /* KHI TAB ĐƯỢC CHỌN (ACTIVE) */
     .nav-tab-btn.active {
-      background: linear-gradient(135deg, #ee4d2d, #ff5722);
       color: #ffffff !important;
-      box-shadow: 0 4px 12px rgba(238, 77, 45, 0.35);
+    }
+
+    #tab-order.active {
+      background: linear-gradient(135deg, #ee4d2d, #ff5722);
+      box-shadow: 0 4px 14px rgba(238, 77, 45, 0.38);
+    }
+
+    #tab-tracking.active {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.38);
     }
 
     .nav-tab-btn.active i {
@@ -114,7 +122,7 @@
 
     /* KHI CHƯA CHỌN (HOVER) */
     .nav-tab-btn:not(.active):hover {
-      color: #1e293b;
+      color: #0f172a;
       background: #e2e8f0;
     }
 
@@ -221,6 +229,7 @@
       border: none;
       display: block;
       background: #f8fafc;
+      -webkit-overflow-scrolling: touch;
     }
 
     /* MÀN HÌNH CHỜ BAN ĐẦU */
