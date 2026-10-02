@@ -2,16 +2,10 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
+  <base target="_top">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Hệ Thống Đặt Đơn Hộ Shopee - Săn Voucher 100K</title>
-
-  <!-- Tối ưu tốc độ: Bắt tay DNS & SSL với máy chủ Google Apps Script trước -->
-  <link rel="preconnect" href="https://script.google.com" crossorigin>
-  <link rel="preconnect" href="https://script.googleusercontent.com" crossorigin>
-  <link rel="dns-prefetch" href="https://script.google.com">
-  <link rel="dns-prefetch" href="https://script.googleusercontent.com">
-
-  <!-- Favicon đã nén siêu nhẹ -->
+  <title>Hệ Thống Đặt Đơn Hộ Shopee</title>
+  <!-- Favicon đã nén siêu nhẹ (6 KB) -->
   <link rel="icon" href="https://files.catbox.moe/reu1gz.png" type="image/png">
   <link rel="apple-touch-icon" href="https://files.catbox.moe/reu1gz.png">
 
@@ -31,166 +25,2080 @@
   <meta property="og:image:height" content="571">
   <meta property="og:image:alt" content="Hệ Thống Đặt Đơn Hộ Shopee - Săn Voucher 100K">
 
-  <!-- Twitter -->
-  <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="https://ma100.xyz/">
-  <meta property="twitter:title" content="Hệ Thống Đặt Đơn Hộ Shopee - Săn Voucher 100K">
-  <meta property="twitter:description" content="Hỗ trợ săn voucher giảm giá 100.000đ, đặt hàng Shopee nhanh chóng, an toàn và thanh toán tự động qua VietQR.">
-  <meta property="twitter:image" content="https://files.catbox.moe/pr2jg1.jpg">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://ma100.xyz/">
+  <meta name="twitter:title" content="Hệ Thống Đặt Đơn Hộ Shopee - Săn Voucher 100K">
+  <meta name="twitter:description" content="Hỗ trợ săn voucher giảm giá 100.000đ, đặt hàng Shopee nhanh chóng, an toàn và thanh toán tự động qua VietQR.">
+  <meta name="twitter:image" content="https://files.catbox.moe/pr2jg1.jpg">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 Icons with DNS Prefetch -->
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
   <style>
+    :root {
+      --shopee-orange: #EE4D2D;
+      --shopee-orange-hover: #D73211;
+      --shopee-orange-light: #FFF5F1;
+      --shopee-orange-border: rgba(238, 77, 45, 0.25);
+      --bg-color: #F8FAFC;
+      --card-bg: #FFFFFF;
+      --text-main: #0F172A;
+      --text-muted: #475569;
+      --text-sub: #64748B;
+      --border-color: #CBD5E1;
+      --border-light: #E2E8F0;
+      --radius-lg: 16px;
+      --radius-md: 10px;
+      --radius-sm: 8px;
+      --success: #10B981;
+      --success-dark: #059669;
+      --success-light: #ECFDF5;
+      --primary-blue: #0284C7;
+      --primary-blue-light: #F0F9FF;
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-    }
-    html, body {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      background-color: #F8FAFC;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      -webkit-tap-highlight-color: transparent;
     }
 
-    /* Màn hình tải trang siêu nhanh (0.01s hiển thị ngay, không bị màn hình trắng) */
-    #page-loader {
-      position: fixed;
-      top: 0;
-      left: 0;
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px 14px 40px 14px;
+      line-height: 1.5;
+    }
+
+    .container {
       width: 100%;
-      height: 100%;
+      max-width: 530px;
+      margin: 0 auto;
+    }
+
+    /* ==================== BRAND HEADER ==================== */
+    .brand-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .brand-logo-wrap {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+    }
+
+    .brand-logo-badge {
+      width: 62px;
+      height: 62px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #ff6536 0%, #ee4d2d 100%);
+      box-shadow: 0 8px 20px rgba(238, 77, 45, 0.32);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      font-size: 28px;
+      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+      cursor: default;
+    }
+
+    .brand-logo-badge:hover {
+      transform: translateY(-2px) scale(1.06);
+      box-shadow: 0 12px 24px rgba(238, 77, 45, 0.42);
+    }
+
+    .brand-logo-img {
+      width: 64px;
+      height: 64px;
+      border-radius: 18px;
+      object-fit: cover;
+      border: 2.5px solid #FFFFFF;
+      box-shadow: 0 6px 18px rgba(238, 77, 45, 0.25);
       background: #FFFFFF;
+      display: block;
+      transition: transform 0.25s ease;
+    }
+
+    .brand-logo-img:hover {
+      transform: scale(1.05);
+    }
+
+    .brand-title {
+      font-size: 21px;
+      font-weight: 800;
+      color: #0F172A;
+      margin-bottom: 4px;
+      letter-spacing: -0.3px;
+    }
+
+    .brand-subtitle {
+      font-size: 13.5px;
+      color: var(--text-sub);
+    }
+
+    /* ==================== STEPPER 3 BƯỚC ==================== */
+    .stepper-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      margin: 16px 6px 24px 6px;
+    }
+
+    .stepper-wrap::before {
+      content: '';
+      position: absolute;
+      top: 19px;
+      left: 14%;
+      right: 14%;
+      height: 2px;
+      background: var(--border-light);
+      z-index: 1;
+    }
+
+    .step-node {
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      z-index: 9999;
-      transition: opacity 0.35s ease, visibility 0.35s ease;
+      gap: 6px;
+      background: var(--bg-color);
+      padding: 0 8px;
+      position: relative;
+      z-index: 2;
+      cursor: pointer;
+      user-select: none;
     }
-    #page-loader.hidden {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-    }
-    .loader-icon {
-      width: 68px;
-      height: 68px;
-      border-radius: 20px;
-      background: linear-gradient(135deg, #EE4D2D, #FF6842);
+
+    .step-circle {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: #FFFFFF;
+      border: 2px solid var(--border-color);
+      color: var(--text-sub);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #FFFFFF;
-      font-size: 32px;
-      box-shadow: 0 10px 25px rgba(238, 77, 45, 0.3);
-      animation: pulse 1.6s infinite ease-in-out;
-    }
-    .loader-title {
-      margin-top: 18px;
-      font-size: 16px;
       font-weight: 700;
+      font-size: 14px;
+      transition: all 0.25s ease;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+    }
+
+    .step-label {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--text-sub);
+      transition: all 0.25s ease;
+      white-space: nowrap;
+    }
+
+    .step-node.active .step-circle {
+      background: var(--shopee-orange);
+      border-color: var(--shopee-orange);
+      color: #FFFFFF;
+      box-shadow: 0 0 0 4px rgba(238, 77, 45, 0.2);
+    }
+
+    .step-node.active .step-label {
+      color: var(--shopee-orange);
+      font-weight: 700;
+    }
+
+    .step-node.done .step-circle {
+      background: var(--success);
+      border-color: var(--success);
+      color: #FFFFFF;
+    }
+
+    .step-node.done .step-label {
+      color: var(--success-dark);
+      font-weight: 700;
+    }
+
+    /* ==================== MAIN CARD ==================== */
+    .main-card {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      padding: 24px 20px;
+      box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.06), 0 2px 8px -2px rgba(15, 23, 42, 0.04);
+      border: 1px solid var(--border-light);
+      margin-bottom: 18px;
+    }
+
+    .card-title {
+      font-size: 17px;
+      font-weight: 800;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #0F172A;
+      padding-bottom: 12px;
+      border-bottom: 1.5px solid #F1F5F9;
+    }
+
+    /* ==================== FORM ELEMENTS ==================== */
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 14.5px;
+      font-weight: 700;
+      color: #1E293B;
+      margin-bottom: 5px;
+    }
+
+    .form-sublabel {
+      font-size: 12.5px;
+      color: var(--text-sub);
+      margin-bottom: 8px;
+      display: block;
+      line-height: 1.4;
+    }
+
+    .required {
+      color: var(--shopee-orange);
+      font-weight: 700;
+    }
+
+    .input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-icon {
+      position: absolute;
+      left: 14px;
+      color: #94A3B8;
+      font-size: 15px;
+      pointer-events: none;
+    }
+
+    .form-input {
+      width: 100%;
+      height: 48px;
+      padding: 12px 14px 12px 42px;
+      font-size: 15px;
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-md);
+      outline: none;
+      transition: all 0.2s ease;
+      background: #FFFFFF;
       color: #0F172A;
     }
-    .loader-sub {
+
+    textarea.form-input {
+      height: auto;
+      min-height: 85px;
+      padding: 12px 14px 12px 42px;
+      resize: vertical;
+      font-family: inherit;
+      line-height: 1.5;
+    }
+
+    .form-input:focus {
+      border-color: var(--shopee-orange);
+      box-shadow: 0 0 0 3.5px rgba(238, 77, 45, 0.14);
+      background: #FFFFFF;
+    }
+
+    .form-input::placeholder {
+      color: #94A3B8;
+      font-size: 14px;
+    }
+
+    .form-input.is-invalid {
+      border-color: #EF4444;
+      background: #FEF2F2;
+    }
+
+    .error-msg {
+      font-size: 12.5px;
+      color: #EF4444;
       margin-top: 6px;
-      font-size: 13px;
-      color: #64748B;
+      font-weight: 600;
+      display: none;
     }
-    .loader-bar-wrap {
-      width: 160px;
-      height: 4px;
-      background: #E2E8F0;
-      border-radius: 10px;
-      margin-top: 20px;
-      overflow: hidden;
+
+    /* ==================== LỰA CHỌN SĐT NGƯỜI NHẬN ==================== */
+    .choice-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 6px;
+    }
+
+    @media (max-width: 420px) {
+      .choice-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+    }
+
+    .choice-card {
+      border: 1.5px solid var(--border-color);
+      border-radius: 12px;
+      padding: 13px 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background: #FFFFFF;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
       position: relative;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
     }
-    .loader-bar {
-      position: absolute;
+
+    .choice-card:hover {
+      border-color: #94A3B8;
+      background: #F8FAFC;
+    }
+
+    .native-radio {
+      display: none;
+    }
+
+    .choice-card.selected {
+      border-color: var(--shopee-orange);
+      background: var(--shopee-orange-light);
+      box-shadow: 0 0 0 1px var(--shopee-orange);
+    }
+
+    .choice-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      pointer-events: none;
+    }
+
+    .choice-title {
+      font-size: 14px;
+      font-weight: 750;
+      color: #0F172A;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .choice-card.selected .choice-title {
+      color: var(--shopee-orange);
+    }
+
+    .choice-radio {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid #CBD5E1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      background: #FFFFFF;
+      flex-shrink: 0;
+    }
+
+    .choice-card.selected .choice-radio {
+      border-color: var(--shopee-orange);
+      background: var(--shopee-orange);
+    }
+
+    .choice-radio::after {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #FFFFFF;
+      opacity: 0;
+      transform: scale(0);
+      transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .choice-card.selected .choice-radio::after {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .choice-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.4;
+      pointer-events: none;
+    }
+
+    .choice-preview-phone {
+      margin-top: 10px;
+      font-size: 13px;
+      color: var(--primary-blue);
+      background: #EFF6FF;
+      border: 1px solid #BFDBFE;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-weight: 600;
+      display: none;
+    }
+
+    /* ==================== BUTTONS ==================== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      height: 48px;
+      padding: 0 22px;
+      font-size: 15px;
+      font-weight: 700;
+      border-radius: var(--radius-md);
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      user-select: none;
+    }
+
+    .btn-block {
+      width: 100%;
+    }
+
+    .btn-primary {
+      background: var(--shopee-orange);
+      color: #FFFFFF;
+      box-shadow: 0 4px 12px rgba(238, 77, 45, 0.26);
+    }
+
+    .btn-primary:hover {
+      background: var(--shopee-orange-hover);
+      box-shadow: 0 6px 16px rgba(238, 77, 45, 0.34);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    .btn-secondary {
+      background: #F1F5F9;
+      color: #334155;
+      border: 1px solid var(--border-color);
+    }
+
+    .btn-secondary:hover {
+      background: #E2E8F0;
+      color: #0F172A;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .btn-row .btn {
+      flex: 1;
+    }
+
+    /* ==================== SHOPEE PDP CONTAINER ==================== */
+    .pdp-container {
+      margin-top: 12px;
+      background: #F8FAFC;
+      border: 1.5px solid var(--border-light);
+      border-radius: 12px;
+      padding: 14px;
+      display: none;
+    }
+
+    .pdp-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .pdp-img {
+      width: 76px;
+      height: 76px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+      flex-shrink: 0;
+      background: #FFFFFF;
+    }
+
+    .pdp-meta {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .pdp-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11.5px;
+      color: var(--success-dark);
+      background: var(--success-light);
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.2px;
+    }
+
+    .pdp-title {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: #0F172A;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      line-height: 1.4;
+    }
+
+    /* ==================== BẢNG THÔNG BÁO XÁC NHẬN ĐƠN HÀNG (MODAL) ==================== */
+    .modal-overlay {
+      position: fixed;
       top: 0;
       left: 0;
-      height: 100%;
-      width: 40%;
-      background: #EE4D2D;
-      border-radius: 10px;
-      animation: loading 1.2s infinite ease-in-out;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(5px);
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .modal-box {
+      background: #FFFFFF;
+      width: 100%;
+      max-width: 470px;
+      border-radius: 18px;
+      padding: 24px 20px;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
+      animation: modalScaleUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    @keyframes modalScaleUp {
+      from { transform: scale(0.93); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      border-bottom: 1.5px solid var(--border-light);
+      padding-bottom: 12px;
+    }
+
+    .modal-title {
+      font-size: 17.5px;
+      font-weight: 800;
+      color: #0F172A;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .modal-close-btn {
+      background: none;
+      border: none;
+      font-size: 20px;
+      color: #94A3B8;
+      cursor: pointer;
+      padding: 4px;
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+
+    .modal-close-btn:hover {
+      color: #0F172A;
+      background: #F1F5F9;
+    }
+
+    .modal-product-card {
+      display: flex;
+      gap: 12px;
+      background: #F8FAFC;
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 14px;
+      border: 1px solid var(--border-light);
+    }
+
+    .modal-prod-img {
+      width: 68px;
+      height: 68px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      background: #FFFFFF;
+      flex-shrink: 0;
+    }
+
+    .modal-prod-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .modal-prod-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #0F172A;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      line-height: 1.35;
+      margin-bottom: 4px;
+    }
+
+    .modal-prod-variant {
+      font-size: 13px;
+      color: var(--shopee-orange);
+      font-weight: 600;
+    }
+
+    /* Modal Money Summary */
+    .modal-money-box {
+      background: #FFF7ED;
+      border: 1.5px solid #FFEDD5;
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 14px;
+    }
+
+    .modal-money-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    /* Modal Recipient Review */
+    .modal-recipient-box {
+      background: #F8FAFC;
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 18px;
+      font-size: 13px;
+      color: #334155;
+      line-height: 1.6;
+      border: 1px solid var(--border-light);
+    }
+
+    .modal-recipient-box strong {
+      color: #0F172A;
+    }
+
+    /* ==================== BƯỚC 3: VIETQR & TRẠNG THÁI THANH TOÁN ==================== */
+    .qr-container {
+      text-align: center;
+      padding: 8px 0;
+    }
+
+    .qr-status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 700;
+      background: #EFF6FF;
+      color: var(--primary-blue);
+      margin-bottom: 16px;
+      border: 1px solid #BAE6FD;
+    }
+
+    .pulse-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--primary-blue);
+      box-shadow: 0 0 0 0 rgba(2, 132, 199, 0.7);
+      animation: pulse 1.5s infinite;
     }
 
     @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.06); }
-    }
-    @keyframes loading {
-      0% { left: -40%; width: 40%; }
-      50% { left: 30%; width: 60%; }
-      100% { left: 100%; width: 40%; }
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(2, 132, 199, 0.7); }
+      70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(2, 132, 199, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(2, 132, 199, 0); }
     }
 
-    /* Khung iframe chứa ứng dụng Google Apps Script */
-    .app-frame-wrap {
-      position: fixed;
-      top: -46px; /* Ẩn thanh cảnh báo trên cùng của Google */
-      left: 0;
-      width: 100%;
-      height: calc(100% + 46px);
-      overflow: hidden;
+    .qr-wrapper {
+      display: inline-block;
+      padding: 12px;
+      background: #FFFFFF;
+      border-radius: 16px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+      border: 1.5px solid var(--border-color);
+      margin-bottom: 14px;
     }
-    iframe {
+
+    .qr-image {
+      width: 240px;
+      height: 240px;
+      object-fit: contain;
+      display: block;
+      border-radius: 8px;
+    }
+
+    .bank-details-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 14px;
+      background: #F8FAFC;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border-light);
+    }
+
+    .bank-details-table td {
+      padding: 12px 14px;
+      font-size: 14px;
+      border-bottom: 1px solid #E2E8F0;
+      text-align: left;
+    }
+
+    .bank-details-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .bank-td-label {
+      width: 36%;
+      color: var(--text-sub);
+      font-weight: 600;
+    }
+
+    .bank-td-val {
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+    }
+
+    .btn-copy {
+      padding: 6px 11px;
+      font-size: 12px;
+      background: #FFFFFF;
+      border: 1.5px solid var(--border-color);
+      border-radius: 6px;
+      color: var(--text-main);
+      cursor: pointer;
+      font-weight: 700;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .btn-copy:hover {
+      background: var(--shopee-orange-light);
+      border-color: var(--shopee-orange);
+      color: var(--shopee-orange);
+    }
+
+    .btn-copy.copied {
+      background: var(--success);
+      color: #FFFFFF;
+      border-color: var(--success);
+    }
+
+    /* ==================== SUCCESS SCREEN ==================== */
+    .success-screen {
+      display: none;
+      text-align: center;
+      padding: 30px 20px;
+      background: #FFFFFF;
+      border-radius: var(--radius-lg);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      border: 2px solid var(--success);
+    }
+
+    .success-icon-wrap {
+      width: 84px;
+      height: 84px;
+      border-radius: 50%;
+      background: #ECFDF5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 18px auto;
+      border: 4px solid var(--success);
+      color: var(--success);
+      font-size: 42px;
+      animation: bounceIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes bounceIn {
+      0% { transform: scale(0.3); opacity: 0; }
+      50% { transform: scale(1.1); }
+      70% { transform: scale(0.9); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .success-title {
+      font-size: 21px;
+      font-weight: 850;
+      color: #065F46;
+      margin-bottom: 6px;
+    }
+
+    .success-subtitle {
+      font-size: 14.5px;
+      color: var(--text-sub);
+      margin-bottom: 22px;
+    }
+
+    .review-card {
+      background: #FFFFFF;
+      border: 1.5px solid #A7F3D0;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 18px;
+      text-align: left;
+    }
+
+    .review-item {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13.5px;
+      margin-bottom: 10px;
+      color: var(--text-sub);
+    }
+
+    .review-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .review-label {
+      font-weight: 600;
+      color: #64748B;
+    }
+
+    .review-val {
+      font-weight: 700;
+      color: var(--text-main);
+      text-align: right;
+    }
+
+    .spinner {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: #FFFFFF;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* ==================== NÚT ZALO LIÊN HỆ GÓC MÀN HÌNH ==================== */
+    .zalo-float-btn {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 9990;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 52px;
+      height: 52px;
+      background: #FFFFFF;
+      padding: 0;
+      border-radius: 50%;
+      box-shadow: 0 6px 20px rgba(0, 104, 255, 0.32), 0 2px 8px rgba(0, 0, 0, 0.08);
+      border: 1.5px solid #E0EDFF;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+      user-select: none;
+    }
+
+    .zalo-float-btn:hover {
+      transform: translateY(-3px) scale(1.08);
+      box-shadow: 0 10px 28px rgba(0, 104, 255, 0.42), 0 4px 12px rgba(0, 0, 0, 0.12);
+      border-color: #0068FF;
+    }
+
+    .zalo-float-pulse {
+      position: absolute;
+      top: -3px;
+      left: -3px;
+      right: -3px;
+      bottom: -3px;
+      border-radius: 50%;
+      background: rgba(0, 104, 255, 0.35);
+      animation: zaloPulse 2s infinite cubic-bezier(0.25, 1, 0.5, 1);
+      z-index: 1;
+    }
+
+    @keyframes zaloPulse {
+      0% {
+        transform: scale(0.95);
+        opacity: 0.9;
+      }
+      70% {
+        transform: scale(1.45);
+        opacity: 0;
+      }
+      100% {
+        transform: scale(1.45);
+        opacity: 0;
+      }
+    }
+
+    .zalo-float-icon {
+      position: relative;
+      z-index: 2;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      box-shadow: 0 3px 10px rgba(0, 104, 255, 0.25);
+    }
+
+    .zalo-float-icon svg {
       width: 100%;
       height: 100%;
-      border: none;
       display: block;
-      background: #F8FAFC;
+    }
+
+    @media (max-width: 480px) {
+      .zalo-float-btn {
+        bottom: 20px;
+        right: 18px;
+        width: 48px;
+        height: 48px;
+      }
+      .zalo-float-icon {
+        width: 40px;
+        height: 40px;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Màn hình chờ siêu mượt giúp người dùng không thấy màn hình trắng -->
-  <div id="page-loader">
-    <div class="loader-icon">🛍️</div>
-    <div class="loader-title">Hệ Thống Đặt Đơn Hộ Shopee</div>
-    <div class="loader-sub">Đang kết nối hệ thống tốc độ cao...</div>
-    <div class="loader-bar-wrap">
-      <div class="loader-bar"></div>
+
+  <div class="container">
+    <!-- Brand Header -->
+    <div class="brand-header">
+      <div class="brand-logo-wrap">
+        <div class="brand-logo-badge">
+          <i class="fa-solid fa-cart-shopping"></i>
+        </div>
+      </div>
+      <h1 class="brand-title">Hệ Thống Đặt Đơn Hộ Shopee</h1>
+      <p class="brand-subtitle">Giảm 100k cho đơn hàng từ 0đ</p>
+    </div>
+
+    <!-- Stepper 3 Bước -->
+    <div class="stepper-wrap">
+      <div class="step-node active" id="stepNode1" onclick="handleStepNodeClick(1)">
+        <div class="step-circle"><i class="fa-solid fa-user"></i></div>
+        <div class="step-label">1. Người nhận</div>
+      </div>
+      <div class="step-node" id="stepNode2" onclick="handleStepNodeClick(2)">
+        <div class="step-circle"><i class="fa-solid fa-bag-shopping"></i></div>
+        <div class="step-label">2. Chọn sản phẩm</div>
+      </div>
+      <div class="step-node" id="stepNode3" onclick="handleStepNodeClick(3)">
+        <div class="step-circle"><i class="fa-solid fa-qrcode"></i></div>
+        <div class="step-label">3. Thanh toán tự động</div>
+      </div>
+    </div>
+
+    <!-- ==================== TRANG THỨ 1: THÔNG TIN NGƯỜI NHẬN HÀNG ==================== -->
+    <div class="main-card" id="step1Card">
+      <h2 class="card-title">
+        <i class="fa-solid fa-id-card" style="color: var(--shopee-orange);"></i> Thông Tin Người Nhận
+      </h2>
+
+      <!-- Tên người nhận -->
+      <div class="form-group">
+        <label class="form-label" for="recipientName">
+          Tên người nhận: <span class="required">*</span>
+        </label>
+        <div class="input-wrapper">
+          <i class="fa-solid fa-user input-icon"></i>
+          <input type="text" id="recipientName" class="form-input" placeholder="Nguyễn Văn A" autocomplete="name">
+        </div>
+        <div class="error-msg" id="nameError">Vui lòng nhập họ và tên người nhận</div>
+      </div>
+
+      <!-- ZALO liên hệ -->
+      <div class="form-group">
+        <label class="form-label" for="zaloPhone">
+          ZALO liên hệ: <span class="required">*</span>
+        </label>
+        <span class="form-sublabel">(SĐT có tài khoản Zalo để tra cứu thông tin đơn hàng)</span>
+        <div class="input-wrapper">
+          <i class="fa-solid fa-phone input-icon"></i>
+          <input type="tel" id="zaloPhone" class="form-input" placeholder="0912345678" autocomplete="tel" oninput="handleZaloPhoneChange()">
+        </div>
+        <div class="error-msg" id="zaloPhoneError">Số điện thoại Zalo không hợp lệ (cần đúng 10 số)</div>
+      </div>
+
+      <!-- SĐT người nhận: 2 lựa chọn (SĐT ẢO vs Dùng số ZALO) -->
+      <div class="form-group">
+        <label class="form-label">
+          SĐT người nhận: <span class="required">*</span>
+        </label>
+
+        <div class="choice-grid">
+          <!-- Lựa chọn 1: SĐT ẢO -->
+          <label class="choice-card" id="choiceCardVirtual" onclick="selectPhoneChoice('virtual')">
+            <div class="choice-header">
+              <div class="choice-title">
+                <i class="fa-solid fa-user-shield" style="color: #10B981;"></i> SĐT ẢO
+              </div>
+              <input type="radio" name="recipientPhoneType" id="radioVirtual" value="virtual" class="native-radio">
+              <div class="choice-radio"></div>
+            </div>
+            <div class="choice-desc">Hạn chế bị HỦY đơn, bạn cần chủ động liên hệ shiper để nhận hàng.</div>
+          </label>
+
+          <!-- Lựa chọn 2: Dùng số ZALO -->
+          <label class="choice-card" id="choiceCardZalo" onclick="selectPhoneChoice('zalo')">
+            <div class="choice-header">
+              <div class="choice-title">
+                <i class="fa-solid fa-comment-dots" style="color: #0284C7;"></i> Dùng số ZALO
+              </div>
+              <input type="radio" name="recipientPhoneType" id="radioZalo" value="zalo" class="native-radio">
+              <div class="choice-radio"></div>
+            </div>
+            <div class="choice-desc">Sử dụng số Zalo ở trên làm số điện thoại nhận hàng.</div>
+          </label>
+        </div>
+
+        <div class="error-msg" id="phoneChoiceError">Vui lòng bấm chọn 1 trong 2 lựa chọn SĐT người nhận</div>
+
+        <div id="choiceNoticeBox" class="choice-preview-phone" style="display: none;">
+          <i class="fa-solid fa-circle-check"></i> Số nhận hàng: <span id="previewPhoneTxt">Chưa chọn</span>
+        </div>
+      </div>
+
+      <!-- Địa chỉ nhận hàng -->
+      <div class="form-group">
+        <label class="form-label" for="recipientAddress">
+          Địa chỉ nhận hàng: <span class="required">*</span>
+        </label>
+        <div class="input-wrapper">
+          <i class="fa-solid fa-location-dot input-icon" style="top: 15px;"></i>
+          <textarea id="recipientAddress" class="form-input" placeholder="Số 23 ngõ 15 đường Lê Thanh Nghị, Phường Hai Bà Trưng, Hà Nội"></textarea>
+        </div>
+        <div class="error-msg" id="addressError">Vui lòng nhập chi tiết địa chỉ giao hàng</div>
+      </div>
+
+      <!-- Mã giới thiệu (Ẩn phần hiển thị theo yêu cầu) -->
+      <input type="hidden" id="referralCode" value="">
+
+      <button type="button" class="btn btn-primary btn-block" onclick="goToStep2()">
+        Chọn sản phẩm <i class="fa-solid fa-arrow-right"></i>
+      </button>
+    </div>
+
+    <!-- ==================== TRANG THỨ 2: THÔNG TIN SẢN PHẨM SHOPEE ==================== -->
+    <div class="main-card" id="step2Card" style="display: none;">
+      <h2 class="card-title">
+        <i class="fa-solid fa-bag-shopping" style="color: var(--shopee-orange);"></i> Thông Tin Sản Phẩm
+      </h2>
+
+      <!-- Ô nhập link Shopee -->
+      <div class="form-group">
+        <label class="form-label" for="shopeeUrl">
+          Link sản phẩm: <span class="required">*</span>
+        </label>
+        <span class="form-sublabel">Dán link sản phẩm Shopee bạn muốn đặt (Hỗ trợ shopee.vn, shp.ee)</span>
+        <div class="input-wrapper">
+          <i class="fa-solid fa-link input-icon"></i>
+          <input type="url" id="shopeeUrl" class="form-input" placeholder="Dán link sản phẩm Shopee tại đây..." onpaste="handleUrlPaste(event)" oninput="handleUrlInput(event)">
+        </div>
+        <div class="error-msg" id="urlError">Vui lòng dán link sản phẩm Shopee hợp lệ</div>
+      </div>
+
+      <!-- Hộp chi tiết sản phẩm Shopee (PDP) lấy từ API addlivetag.com -->
+      <div class="pdp-container" id="pdpBox" style="display: none; margin-bottom: 18px;">
+        <div class="pdp-header">
+          <img id="pdpMainImg" class="pdp-img" src="" alt="Sản phẩm">
+          <div class="pdp-meta">
+            <div class="pdp-badge">
+              <i class="fa-solid fa-circle-check"></i> Đã nhận diện sản phẩm
+            </div>
+            <h3 id="pdpProductTitle" class="pdp-title">Đang tải tên sản phẩm...</h3>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ô nhập Phân loại sản phẩm + Số lượng -->
+      <div class="form-group">
+        <label class="form-label" for="variationQuantityInput">
+          Phân loại sản phẩm + Số lượng: <span class="required">*</span>
+        </label>
+        <span class="form-sublabel">Nhập màu sắc, kích cỡ, phân loại kèm số lượng bạn muốn đặt</span>
+        <div class="input-wrapper">
+          <i class="fa-solid fa-tags input-icon"></i>
+          <input type="text" id="variationQuantityInput" class="form-input" placeholder="Ví dụ: Size M màu Đen + SL: 1....">
+        </div>
+        <div class="error-msg" id="varQtyError">Vui lòng nhập phân loại sản phẩm và số lượng</div>
+      </div>
+
+      <div class="btn-row">
+        <button type="button" class="btn btn-secondary" onclick="goToStep1()">
+          <i class="fa-solid fa-arrow-left"></i> Quay lại
+        </button>
+        <button type="button" class="btn btn-primary" onclick="openOrderConfirmModal()">
+          <i class="fa-solid fa-cart-shopping"></i> Đặt hàng ngay
+        </button>
+      </div>
+    </div>
+
+    <!-- ==================== TRANG THỨ 3: THANH TOÁN TỰ ĐỘNG ==================== -->
+    <div class="main-card" id="step3Card" style="display: none;">
+      <h2 class="card-title">
+        <i class="fa-solid fa-qrcode" style="color: var(--shopee-orange);"></i> Thanh Toán Tự Động
+      </h2>
+
+      <!-- Đơn hàng thanh toán cứng 40k qua VietQR.io -->
+      <div id="vietqrBox">
+        <div class="qr-container">
+          <div class="qr-status-badge">
+            <div class="pulse-dot"></div>
+            <span>Đang chờ nhận tiền... (Tự động nhận diện mỗi 3s)</span>
+          </div>
+
+          <div class="qr-wrapper">
+            <img id="vietqrImg" class="qr-image" src="" alt="Mã VietQR thanh toán 40k">
+          </div>
+
+          <div style="font-size: 13.5px; color: var(--text-sub); margin-bottom: 14px;">
+            Mở App ngân hàng bất kỳ để quét mã QR và thanh toán tự động
+          </div>
+
+          <!-- Bảng thông tin chuyển khoản có nút Copy -->
+          <table class="bank-details-table">
+            <tr>
+              <td class="bank-td-label">Ngân hàng:</td>
+              <td class="bank-td-val">
+                <span id="bankNameDisplay">MBBank (MB)</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="bank-td-label">Số tài khoản:</td>
+              <td class="bank-td-val">
+                <span id="bankAccountNo" style="font-family: monospace; font-size: 15px;">0868***119</span>
+                <button type="button" class="btn-copy" onclick="copyAccountNo(this)">
+                  <i class="fa-regular fa-copy"></i> Sao chép
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td class="bank-td-label">Chủ tài khoản:</td>
+              <td class="bank-td-val">
+                <span id="bankAccountName">PHAM THI MY LINH</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="bank-td-label">Số tiền:</td>
+              <td class="bank-td-val">
+                <span id="bankAmount" style="color: var(--shopee-orange); font-size: 16px;">40.000 ₫</span>
+                <button type="button" class="btn-copy" onclick="copyRawAmount(this)">
+                  <i class="fa-regular fa-copy"></i> Sao chép
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td class="bank-td-label">Nội dung CK:</td>
+              <td class="bank-td-val">
+                <span id="bankOrderCode" style="color: #0284C7; font-family: monospace; font-size: 14.5px;">SMSNLinh...</span>
+                <button type="button" class="btn-copy" onclick="copyToClipboard('bankOrderCode', this)">
+                  <i class="fa-regular fa-copy"></i> Sao chép
+                </button>
+              </td>
+            </tr>
+          </table>
+
+          <div style="font-size: 12.5px; color: #475569; margin-top: 14px; background: #F1F5F9; padding: 10px 14px; border-radius: 10px; line-height: 1.5; text-align: left;">
+            <i class="fa-solid fa-circle-info" style="color: #0284C7;"></i> Vui lòng <strong>giữ nguyên nội dung chuyển khoản</strong> để hệ thống tự động nhận diện và kích hoạt đơn hàng thành công.
+          </div>
+
+          <!-- Nút kiểm tra thủ công chủ động -->
+          <button type="button" id="btnManualCheckPay" class="btn btn-primary btn-block" style="margin-top: 16px;" onclick="manualCheckPayment()">
+            <i class="fa-solid fa-arrows-rotate"></i> Kiểm tra giao dịch
+          </button>
+          <div id="checkPayMsg" style="display: none; text-align: center; margin-top: 10px; font-size: 13.5px; font-weight: 600;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== MÀN HÌNH LỚN: HỆ THỐNG ĐÃ NHẬN TIỀN THÀNH CÔNG! ==================== -->
+    <div class="success-screen" id="successScreen">
+      <div class="success-icon-wrap">
+        <i class="fa-solid fa-check"></i>
+      </div>
+      <h2 class="success-title">HỆ THỐNG ĐÃ NHẬN TIỀN THÀNH CÔNG!</h2>
+      <p class="success-subtitle">Đơn hàng của bạn đã được thanh toán và kích hoạt thành công.</p>
+
+      <div class="review-card">
+        <div class="review-item">
+          <span class="review-label">Mã đơn hàng:</span>
+          <span class="review-val" id="finalOrderCode" style="color: #0284C7; font-family: monospace; font-size: 14px;">-</span>
+        </div>
+        <div class="review-item">
+          <span class="review-label">Tên người nhận:</span>
+          <span class="review-val" id="finalRecipientName">-</span>
+        </div>
+        <div class="review-item">
+          <span class="review-label">SĐT nhận hàng:</span>
+          <span class="review-val" id="finalRecipientPhone">-</span>
+        </div>
+        <div class="review-item">
+          <span class="review-label">Zalo liên hệ:</span>
+          <span class="review-val" id="finalZaloPhone">-</span>
+        </div>
+        <div class="review-item">
+          <span class="review-label">Địa chỉ nhận:</span>
+          <span class="review-val" id="finalRecipientAddress">-</span>
+        </div>
+        <div class="review-item">
+          <span class="review-label">Sản phẩm:</span>
+          <span class="review-val" id="finalProductName">-</span>
+        </div>
+        <div class="review-item">
+          <span class="review-label">Phân loại & SL:</span>
+          <span class="review-val" id="finalVariationQty">-</span>
+        </div>
+        <div class="review-item">
+          <span class="review-label">Số tiền đã thanh toán:</span>
+          <span class="review-val" id="finalPaidAmount" style="color: var(--shopee-orange); font-size: 15px;">40.000 ₫</span>
+        </div>
+        <div class="review-item" id="finalRefRow" style="display: none;">
+          <span class="review-label">Mã giới thiệu:</span>
+          <span class="review-val" id="finalReferralCode" style="color: #0284C7; font-weight: 700;">-</span>
+        </div>
+        <div class="review-item">
+          <span class="review-label">Trạng thái:</span>
+          <span class="review-val" style="color: #059669; font-weight: 750;">
+            <i class="fa-solid fa-circle-check"></i> Đã nhận tiền & Lưu bảng tính
+          </span>
+        </div>
+      </div>
+
+      <p style="font-size: 13px; color: #475569; margin-bottom: 18px; line-height: 1.5;">
+        <i class="fa-solid fa-paper-plane" style="color: #0284C7;"></i> Thông tin xác nhận và mã vận đơn sẽ được thông báo qua số Zalo: <strong id="successZaloTxt">-</strong>
+      </p>
+
+      <button type="button" class="btn btn-primary btn-block" onclick="resetToNewOrder()">
+        <i class="fa-solid fa-plus"></i> Đặt thêm đơn hàng khác
+      </button>
+    </div>
+
+  </div>
+
+  <!-- ==================== NÚT ZALO LIÊN HỆ GÓC MÀN HÌNH ==================== -->
+  <a href="https://zalo.me/g/sctwc3nh43inwwvvp6vc" target="_blank" rel="noopener noreferrer" class="zalo-float-btn" title="Nhấn để tham gia nhóm Zalo Đặt Đơn Hộ">
+    <div class="zalo-float-pulse"></div>
+    <div class="zalo-float-icon">
+      <svg viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M22.782 0.166016H27.199C33.2653 0.166016 36.8103 1.05701 39.9572 2.74421C43.1041 4.4314 45.5875 6.89585 47.2557 10.0428C48.9429 13.1897 49.8339 16.7347 49.8339 22.801V27.1991C49.8339 33.2654 48.9429 36.8104 47.2557 39.9573C45.5685 43.1042 43.1041 45.5877 39.9572 47.2559C36.8103 48.9431 33.2653 49.8341 27.199 49.8341H22.8009C16.7346 49.8341 13.1896 48.9431 10.0427 47.2559C6.89583 45.5687 4.41243 43.1042 2.7442 39.9573C1.057 36.8104 0.166016 33.2654 0.166016 27.1991V22.801C0.166016 16.7347 1.057 13.1897 2.7442 10.0428C4.43139 6.89585 6.89583 4.41245 10.0427 2.74421C13.1707 1.05701 16.7346 0.166016 22.782 0.166016Z" fill="#0068FF"/>
+        <path opacity="0.12" fill-rule="evenodd" clip-rule="evenodd" d="M49.8336 26.4736V27.1994C49.8336 33.2657 48.9427 36.8107 47.2555 39.9576C45.5683 43.1045 43.1038 45.5879 39.9569 47.2562C36.81 48.9434 33.265 49.8344 27.1987 49.8344H22.8007C17.8369 49.8344 14.5612 49.2378 11.8104 48.0966L7.27539 43.4267L49.8336 26.4736Z" fill="#001A33"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M7.779 43.5892C10.1019 43.846 13.0061 43.1836 15.0682 42.1825C24.0225 47.1318 38.0197 46.8954 46.4923 41.4732C46.8209 40.9803 47.1279 40.4677 47.4128 39.9363C49.1062 36.7779 50.0004 33.22 50.0004 27.1316V22.7175C50.0004 16.629 49.1062 13.0711 47.4128 9.91273C45.7385 6.75436 43.2461 4.28093 40.0877 2.58758C36.9293 0.894239 33.3714 0 27.283 0H22.8499C17.6644 0 14.2982 0.652754 11.4699 1.89893C11.3153 2.03737 11.1636 2.17818 11.0151 2.32135C2.71734 10.3203 2.08658 27.6593 9.12279 37.0782C9.13064 37.0921 9.13933 37.1061 9.14889 37.1203C10.2334 38.7185 9.18694 41.5154 7.55068 43.1516C7.28431 43.399 7.37944 43.5512 7.779 43.5892Z" fill="white"/>
+        <path d="M20.5632 17H10.8382V19.0853H17.5869L10.9329 27.3317C10.7244 27.635 10.5728 27.9194 10.5728 28.5639V29.0947H19.748C20.203 29.0947 20.5822 28.7156 20.5822 28.2606V27.1421H13.4922L19.748 19.2938C19.8428 19.1801 20.0134 18.9716 20.0893 18.8768L20.1272 18.8199C20.4874 18.2891 20.5632 17.8341 20.5632 17.2844V17Z" fill="#0068FF"/>
+        <path d="M32.9416 29.0947H34.3255V17H32.2402V28.3933C32.2402 28.7725 32.5435 29.0947 32.9416 29.0947Z" fill="#0068FF"/>
+        <path d="M25.814 19.6924C23.1979 19.6924 21.0747 21.8156 21.0747 24.4317C21.0747 27.0478 23.1979 29.171 25.814 29.171C28.4301 29.171 30.5533 27.0478 30.5533 24.4317C30.5723 21.8156 28.4491 19.6924 25.814 19.6924ZM25.814 27.2184C24.2785 27.2184 23.0273 25.9672 23.0273 24.4317C23.0273 22.8962 24.2785 21.645 25.814 21.645C27.3495 21.645 28.6007 22.8962 28.6007 24.4317C28.6007 25.9672 27.3685 27.2184 25.814 27.2184Z" fill="#0068FF"/>
+        <path d="M40.4867 19.6162C37.8516 19.6162 35.7095 21.7584 35.7095 24.3934C35.7095 27.0285 37.8516 29.1707 40.4867 29.1707C43.1217 29.1707 45.2639 27.0285 45.2639 24.3934C45.2639 21.7584 43.1217 19.6162 40.4867 19.6162ZM40.4867 27.2181C38.9322 27.2181 37.681 25.9669 37.681 24.4124C37.681 22.8579 38.9322 21.6067 40.4867 21.6067C42.0412 21.6067 43.2924 22.8579 43.2924 24.4124C43.2924 25.9669 42.0412 27.2181 40.4867 27.2181Z" fill="#0068FF"/>
+        <path d="M29.4562 29.0944H30.5747V19.957H28.6221V28.2793C28.6221 28.7153 29.0012 29.0944 29.4562 29.0944Z" fill="#0068FF"/>
+      </svg>
+    </div>
+  </a>
+
+  <!-- ==================== MODAL BẢNG THÔNG BÁO XÁC NHẬN ĐƠN HÀNG ==================== -->
+  <div class="modal-overlay" id="confirmModalOverlay">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 class="modal-title">
+          <i class="fa-solid fa-receipt" style="color: var(--shopee-orange);"></i> Xác nhận đơn hàng
+        </h3>
+        <button type="button" class="modal-close-btn" onclick="closeOrderConfirmModal()">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Thẻ thông tin sản phẩm đã chọn -->
+      <div class="modal-product-card">
+        <img id="modalProdImg" class="modal-prod-img" src="" alt="Sản phẩm">
+        <div class="modal-prod-info">
+          <h4 id="modalProdTitle" class="modal-prod-title">Tên sản phẩm</h4>
+          <div id="modalProdVariant" class="modal-prod-variant" style="margin-top: 4px;">Phân loại & SL: -</div>
+        </div>
+      </div>
+
+      <!-- Khung thông báo phí dịch vụ đặt hộ -->
+      <div class="modal-money-box">
+        <div class="modal-money-row">
+          <span>Phí dịch vụ đặt hộ:</span>
+          <span style="color: var(--shopee-orange); font-size: 17px; font-weight: 800;">40.000 ₫</span>
+        </div>
+      </div>
+
+      <!-- Tóm tắt thông tin người nhận -->
+      <div class="modal-recipient-box">
+        <div><strong>Người nhận:</strong> <span id="modalRecName">-</span></div>
+        <div><strong>SĐT nhận hàng:</strong> <span id="modalRecPhone">-</span></div>
+        <div><strong>Zalo liên hệ:</strong> <span id="modalRecZalo">-</span></div>
+        <div><strong>Địa chỉ:</strong> <span id="modalRecAddress">-</span></div>
+        <div id="modalRecRefRow" style="display: none;"><strong>Mã giới thiệu:</strong> <span id="modalRecRef" style="color: #0284C7; font-weight: 700;">-</span></div>
+      </div>
+
+      <!-- Nút thao tác xác nhận -->
+      <div class="btn-row">
+        <button type="button" class="btn btn-secondary" onclick="closeOrderConfirmModal()">
+          Quay lại sửa
+        </button>
+        <button type="button" id="btnConfirmModalSubmit" class="btn btn-primary" onclick="handleConfirmOrderSubmit()">
+          <span id="modalSubmitText">Xác nhận đặt hàng <i class="fa-solid fa-check"></i></span>
+        </button>
+      </div>
     </div>
   </div>
 
-  <div class="app-frame-wrap">
-    <!-- Bỏ loading="lazy" và thêm sự kiện onload để ẩn màn hình chờ ngay khi web tải xong -->
-    <iframe 
-      id="main-app-frame"
-      src="https://script.google.com/macros/s/AKfycbx5dYh2nejqU5YDwvDGxzmutTai0NPg7B55Bn9U2yOC7Q4RqHL9WH8tICrqI-3-RdIi/exec" 
-      allow="clipboard-write; clipboard-read"
-      loading="eager"
-      onload="hidePageLoader()">
-    </iframe>
-  </div>
-
   <script>
-    // Tự động truyền query param (như ?ref=...) từ ma100.xyz vào iframe Google Apps Script
-    (function forwardQueryParams() {
-      try {
-        if (window.location.search) {
-          const iframe = document.getElementById('main-app-frame');
-          if (iframe) {
-            const baseSrc = "https://script.google.com/macros/s/AKfycbx5dYh2nejqU5YDwvDGxzmutTai0NPg7B55Bn9U2yOC7Q4RqHL9WH8tICrqI-3-RdIi/exec";
-            iframe.src = baseSrc + window.location.search;
-          }
-        }
-      } catch (e) {}
-    })();
+    // ==========================================
+    // CẤU HÌNH HỆ THỐNG & TÀI KHOẢN VIETQR
+    // ==========================================
+    const VIETQR_CONFIG = {
+      BANK_ID: "MBBank",
+      ACCOUNT_NO: "0868651119",
+      ACCOUNT_NAME: "PHAM THI MY LINH",
+      TEMPLATE: "compact",
+      FIXED_AMOUNT: 40000,
+      ORDER_PREFIX: "SMSNLinh"
+    };
 
-    // Ẩn màn hình chờ mượt mà khi iframe đã sẵn sàng
-    function hidePageLoader() {
-      const loader = document.getElementById('page-loader');
-      if (loader) {
-        loader.classList.add('hidden');
-        setTimeout(() => { loader.style.display = 'none'; }, 400);
+    // Quản lý trạng thái ứng dụng
+    const appState = {
+      recipientName: '',
+      zaloPhone: '',
+      phoneChoice: '', // Bắt buộc người dùng phải bấm chọn 1 trong 2
+      recipientPhone: '',
+      recipientAddress: '',
+      referralCode: '', // Mã giới thiệu (nếu có)
+      shopeeUrl: '',
+      productName: '',
+      productImage: '',
+      variationWithQty: '',
+      finalTotal: 40000, // Cứng 40k
+      orderCode: '',
+      orderSubmitted: false,
+      pollIntervalId: null
+    };
+
+    // ==================== KHỞI TẠO & LỰA CHỌN SĐT NGƯỜI NHẬN ====================
+    function handleZaloPhoneChange() {
+      const zaloVal = document.getElementById('zaloPhone').value.trim();
+      if (appState.phoneChoice === 'zalo') {
+        const noticeBox = document.getElementById('choiceNoticeBox');
+        if (noticeBox) {
+          noticeBox.style.display = 'block';
+          noticeBox.innerHTML = '<i class="fa-solid fa-circle-check"></i> Số nhận hàng: <strong>' + (zaloVal || 'Đang lấy từ số Zalo') + '</strong>';
+        }
       }
     }
 
-    // Cơ chế an toàn: Tự ẩn sau 6 giây phòng trường hợp mạng chập chờn
-    setTimeout(hidePageLoader, 6000);
+    function selectPhoneChoice(choice) {
+      appState.phoneChoice = choice;
+      const cardZalo = document.getElementById('choiceCardZalo');
+      const cardVirtual = document.getElementById('choiceCardVirtual');
+      const radioVirtual = document.getElementById('radioVirtual');
+      const radioZalo = document.getElementById('radioZalo');
+      const noticeBox = document.getElementById('choiceNoticeBox');
+      const choiceErr = document.getElementById('phoneChoiceError');
+      if (choiceErr) choiceErr.style.display = 'none';
+
+      if (choice === 'virtual') {
+        if (cardVirtual) cardVirtual.classList.add('selected');
+        if (cardZalo) cardZalo.classList.remove('selected');
+        if (radioVirtual) radioVirtual.checked = true;
+        if (radioZalo) radioZalo.checked = false;
+        if (noticeBox) {
+          noticeBox.style.display = 'block';
+          noticeBox.style.background = '#ECFDF5';
+          noticeBox.style.borderColor = '#A7F3D0';
+          noticeBox.style.color = '#059669';
+          noticeBox.innerHTML = '<i class="fa-solid fa-shield-halved"></i> Sử dụng SĐT ngẫu nhiên, Shiper sẽ không gọi giao hàng được mà bạn cần báo trước mã vận đơn cho Shiper để lấy hàng';
+        }
+      } else if (choice === 'zalo') {
+        if (cardZalo) cardZalo.classList.add('selected');
+        if (cardVirtual) cardVirtual.classList.remove('selected');
+        if (radioZalo) radioZalo.checked = true;
+        if (radioVirtual) radioVirtual.checked = false;
+        const zaloVal = (document.getElementById('zaloPhone') ? document.getElementById('zaloPhone').value.trim() : '');
+        if (noticeBox) {
+          noticeBox.style.display = 'block';
+          noticeBox.style.background = '#EFF6FF';
+          noticeBox.style.borderColor = '#BFDBFE';
+          noticeBox.style.color = '#0284C7';
+          noticeBox.innerHTML = '<i class="fa-solid fa-circle-check"></i> Số nhận hàng: <strong>' + (zaloVal || 'Đang lấy từ số Zalo') + '</strong>';
+        }
+      }
+    }
+
+    // ==================== ĐIỀU HƯỚNG BƯỚC (STEPPER 3 BƯỚC) ====================
+    function setStepIndicator(step) {
+      for (let i = 1; i <= 3; i++) {
+        const node = document.getElementById('stepNode' + i);
+        if (i < step) {
+          node.className = 'step-node done';
+        } else if (i === step) {
+          node.className = 'step-node active';
+        } else {
+          node.className = 'step-node';
+        }
+      }
+    }
+
+    function handleStepNodeClick(targetStep) {
+      if (targetStep === 1) {
+        goToStep1();
+      } else if (targetStep === 2) {
+        goToStep2();
+      } else if (targetStep === 3) {
+        if (appState.orderCode) goToStep3();
+        else alert('Vui lòng chọn sản phẩm và bấm "Đặt hàng ngay" ở Bước 2 trước!');
+      }
+    }
+
+    function goToStep1() {
+      setStepIndicator(1);
+      document.getElementById('step1Card').style.display = 'block';
+      document.getElementById('step2Card').style.display = 'none';
+      document.getElementById('step3Card').style.display = 'none';
+      document.getElementById('successScreen').style.display = 'none';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function goToStep2() {
+      const nameInput = document.getElementById('recipientName');
+      const zaloInput = document.getElementById('zaloPhone');
+      const addressInput = document.getElementById('recipientAddress');
+
+      const name = nameInput.value.trim();
+      const zaloRaw = zaloInput.value.trim();
+      const address = addressInput.value.trim();
+
+      // Validate Tên
+      if (!name) {
+        nameInput.classList.add('is-invalid');
+        document.getElementById('nameError').style.display = 'block';
+        alert('Vui lòng nhập họ và tên người nhận!');
+        nameInput.focus();
+        return;
+      } else {
+        nameInput.classList.remove('is-invalid');
+        document.getElementById('nameError').style.display = 'none';
+      }
+
+      // Kiểm tra bắt buộc phải chọn 1 trong 2: SĐT ẢO hoặc Dùng số ZALO
+      if (!appState.phoneChoice) {
+        const choiceErr = document.getElementById('phoneChoiceError');
+        if (choiceErr) choiceErr.style.display = 'block';
+        alert('Vui lòng bấm chọn 1 trong 2 lựa chọn SĐT người nhận: "SĐT ẢO" hoặc "Dùng số ZALO"!');
+        document.getElementById('choiceCardVirtual').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+
+      // Làm sạch số điện thoại
+      let cleanPhone = zaloRaw.replace(/[\s\.\-\(\)]/g, '');
+      if (cleanPhone.startsWith('+84')) {
+        cleanPhone = '0' + cleanPhone.substring(3);
+      } else if (cleanPhone.startsWith('84') && cleanPhone.length > 9) {
+        cleanPhone = '0' + cleanPhone.substring(2);
+      }
+
+      // Xử lý số điện thoại theo lựa chọn
+      if (appState.phoneChoice === 'virtual') {
+        if (!cleanPhone || cleanPhone.toLowerCase() === 'số ảo' || cleanPhone.toLowerCase() === 'sdt ảo') {
+          appState.recipientPhone = 'số ảo';
+          appState.zaloPhone = 'số ảo';
+        } else {
+          appState.recipientPhone = 'số ảo';
+          appState.zaloPhone = cleanPhone;
+        }
+        zaloInput.classList.remove('is-invalid');
+        document.getElementById('zaloPhoneError').style.display = 'none';
+      } else {
+        const phoneRegex = /^0[0-9]{9}$/;
+        if (!cleanPhone) {
+          zaloInput.classList.add('is-invalid');
+          document.getElementById('zaloPhoneError').style.display = 'block';
+          alert('Vui lòng nhập số Zalo liên hệ (10 số)! Hoặc bạn có thể chọn "SĐT ẢO" ở ô bên cạnh.');
+          zaloInput.focus();
+          return;
+        } else if (!phoneRegex.test(cleanPhone)) {
+          zaloInput.classList.add('is-invalid');
+          document.getElementById('zaloPhoneError').style.display = 'block';
+          alert('Số điện thoại chưa đúng định dạng (cần đúng 10 số, bắt đầu bằng số 0)!');
+          zaloInput.focus();
+          return;
+        } else {
+          zaloInput.classList.remove('is-invalid');
+          document.getElementById('zaloPhoneError').style.display = 'none';
+          appState.recipientPhone = cleanPhone;
+          appState.zaloPhone = cleanPhone;
+        }
+      }
+
+      // Validate Địa chỉ nhận hàng
+      if (!address) {
+        addressInput.classList.add('is-invalid');
+        document.getElementById('addressError').style.display = 'block';
+        alert('Vui lòng nhập chi tiết địa chỉ nhận hàng!');
+        addressInput.focus();
+        return;
+      } else {
+        addressInput.classList.remove('is-invalid');
+        document.getElementById('addressError').style.display = 'none';
+      }
+
+      appState.recipientName = name;
+      appState.recipientAddress = address;
+
+      // Lưu mã giới thiệu nếu có (không bắt buộc)
+      const refInput = document.getElementById('referralCode');
+      appState.referralCode = refInput ? refInput.value.trim() : '';
+
+      // Chuyển sang Bước 2
+      setStepIndicator(2);
+      document.getElementById('step1Card').style.display = 'none';
+      document.getElementById('step2Card').style.display = 'block';
+      document.getElementById('step3Card').style.display = 'none';
+      document.getElementById('successScreen').style.display = 'none';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function goToStep3() {
+      setStepIndicator(3);
+      document.getElementById('step1Card').style.display = 'none';
+      document.getElementById('step2Card').style.display = 'none';
+      document.getElementById('step3Card').style.display = 'block';
+      document.getElementById('successScreen').style.display = 'none';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      renderStep3Payment();
+    }
+
+    // ==================== BÓC TÁCH LINK SHOPEE ====================
+    function parseShopeeTitleFromUrlClient(url) {
+      try {
+        const decoded = decodeURIComponent(url);
+        const matchSeo = decoded.match(/seoName=([^&]+)/i);
+        if (matchSeo && matchSeo[1]) {
+          return matchSeo[1].replace(/[-_]+/g, ' ').trim();
+        }
+        const match = decoded.match(/shopee\.vn\/([^\/\?]+)/i);
+        if (match && match[1]) {
+          const slug = match[1].replace(/-i\.\d+\.\d+.*$/i, '');
+          const cleanTitle = slug.replace(/[-_]+/g, ' ').trim();
+          if (cleanTitle && cleanTitle.length > 2 && !cleanTitle.toLowerCase().startsWith('product')) {
+            return cleanTitle;
+          }
+        }
+      } catch (e) {}
+      return 'Sản phẩm Shopee';
+    }
+
+    let urlInputTimer = null;
+    function handleUrlPaste(e) {
+      setTimeout(() => {
+        const url = document.getElementById('shopeeUrl').value.trim();
+        if (url && (url.includes('shopee.vn') || url.includes('shp.ee'))) {
+          fastPreviewProduct(url);
+          handleFetchShopee();
+        }
+      }, 50);
+    }
+
+    function handleUrlInput(e) {
+      if (urlInputTimer) clearTimeout(urlInputTimer);
+      urlInputTimer = setTimeout(() => {
+        const url = document.getElementById('shopeeUrl').value.trim();
+        if (url && (url.includes('shopee.vn') || url.includes('shp.ee'))) {
+          fastPreviewProduct(url);
+          handleFetchShopee();
+        }
+      }, 500);
+    }
+
+    function fastPreviewProduct(url) {
+      const fastTitle = parseShopeeTitleFromUrlClient(url);
+      appState.productName = fastTitle;
+      const pdpBox = document.getElementById('pdpBox');
+      if (pdpBox) pdpBox.style.display = 'block';
+      const titleEl = document.getElementById('pdpProductTitle');
+      if (titleEl) titleEl.innerText = fastTitle;
+      const imgEl = document.getElementById('pdpMainImg');
+      if (imgEl && (!imgEl.src || imgEl.src.includes('placeholder'))) {
+        imgEl.src = 'https://down-vn.img.susercontent.com/file/vn-11134207-7ras8-m27r65gph9q109';
+      }
+    }
+
+    function applyProductData(title, img) {
+      if (title) {
+        appState.productName = title;
+        const titleEl = document.getElementById('pdpProductTitle');
+        if (titleEl) titleEl.innerText = title;
+      }
+      if (img) {
+        appState.productImage = img;
+        const imgEl = document.getElementById('pdpMainImg');
+        if (imgEl) imgEl.src = img;
+      }
+      const pdpBox = document.getElementById('pdpBox');
+      if (pdpBox) pdpBox.style.display = 'block';
+    }
+
+    async function handleFetchShopee() {
+      const urlInput = document.getElementById('shopeeUrl');
+      const rawUrl = urlInput.value.trim();
+
+      if (!rawUrl || (!rawUrl.includes('shopee.vn') && !rawUrl.includes('shp.ee'))) {
+        urlInput.classList.add('is-invalid');
+        document.getElementById('urlError').style.display = 'block';
+        return;
+      }
+
+      urlInput.classList.remove('is-invalid');
+      document.getElementById('urlError').style.display = 'none';
+
+      appState.shopeeUrl = rawUrl;
+      fastPreviewProduct(rawUrl);
+
+      // Gọi API addlivetag.com lấy tên và ảnh sản phẩm
+      try {
+        const apiUrl = 'https://data.addlivetag.com/product-data/product-data.php?url=' + encodeURIComponent(rawUrl);
+        const res = await fetch(apiUrl);
+        if (res.ok) {
+          const json = await res.json();
+          if (json && json.productInfo) {
+            const title = json.productInfo.productName || parseShopeeTitleFromUrlClient(rawUrl);
+            const img = json.productInfo.imageUrl || 'https://down-vn.img.susercontent.com/file/vn-11134207-7ras8-m27r65gph9q109';
+            applyProductData(title, img);
+            return;
+          }
+        }
+      } catch (e) {
+        console.warn('Direct fetch addlivetag:', e);
+      }
+
+      // Backend fallback nếu đang chạy trong GAS
+      if (typeof google !== 'undefined' && google.script && google.script.run) {
+        google.script.run
+          .withSuccessHandler(function(response) {
+            if (response && response.success && response.data) {
+              applyProductData(response.data.name, response.data.image);
+            }
+          })
+          .getShopeeProductInfo(rawUrl);
+      }
+    }
+
+    // ==================== BẢNG THÔNG BÁO XÁC NHẬN ĐƠN HÀNG (MODAL) ====================
+    function openOrderConfirmModal() {
+      const urlInput = document.getElementById('shopeeUrl');
+      const rawUrl = urlInput.value.trim();
+      if (!rawUrl || (!rawUrl.includes('shopee.vn') && !rawUrl.includes('shp.ee'))) {
+        urlInput.classList.add('is-invalid');
+        document.getElementById('urlError').style.display = 'block';
+        alert('Vui lòng dán link Shopee mua hàng hợp lệ!');
+        urlInput.focus();
+        return;
+      }
+      urlInput.classList.remove('is-invalid');
+      document.getElementById('urlError').style.display = 'none';
+      appState.shopeeUrl = rawUrl;
+
+      const varInput = document.getElementById('variationQuantityInput');
+      const varVal = varInput ? varInput.value.trim() : '';
+      if (!varVal) {
+        if (varInput) varInput.classList.add('is-invalid');
+        const varErr = document.getElementById('varQtyError');
+        if (varErr) varErr.style.display = 'block';
+        alert('Vui lòng điền thông tin: Phân loại sản phẩm + Số lượng!');
+        if (varInput) varInput.focus();
+        return;
+      }
+      if (varInput) varInput.classList.remove('is-invalid');
+      const varErr = document.getElementById('varQtyError');
+      if (varErr) varErr.style.display = 'none';
+      appState.variationWithQty = varVal;
+
+      if (!appState.productName) {
+        appState.productName = parseShopeeTitleFromUrlClient(rawUrl);
+      }
+      if (!appState.productImage) {
+        const pdpImg = document.getElementById('pdpMainImg');
+        appState.productImage = (pdpImg && pdpImg.src) ? pdpImg.src : 'https://down-vn.img.susercontent.com/file/vn-11134207-7ras8-m27r65gph9q109';
+      }
+
+      // Điền thông tin vào Modal
+      const modalImg = document.getElementById('modalProdImg');
+      if (modalImg) modalImg.src = appState.productImage;
+      const modalTitle = document.getElementById('modalProdTitle');
+      if (modalTitle) modalTitle.innerText = appState.productName;
+      const modalVar = document.getElementById('modalProdVariant');
+      if (modalVar) modalVar.innerText = 'Phân loại & SL: ' + appState.variationWithQty;
+
+      const recName = document.getElementById('modalRecName');
+      if (recName) recName.innerText = appState.recipientName;
+      const recPhone = document.getElementById('modalRecPhone');
+      if (recPhone) recPhone.innerText = appState.recipientPhone;
+      const recZalo = document.getElementById('modalRecZalo');
+      if (recZalo) recZalo.innerText = appState.zaloPhone;
+      const recAddr = document.getElementById('modalRecAddress');
+      if (recAddr) recAddr.innerText = appState.recipientAddress;
+
+      const refRow = document.getElementById('modalRecRefRow');
+      const refTxt = document.getElementById('modalRecRef');
+      if (appState.referralCode) {
+        if (refRow) refRow.style.display = 'block';
+        if (refTxt) refTxt.innerText = appState.referralCode;
+      } else {
+        if (refRow) refRow.style.display = 'none';
+      }
+
+      const overlay = document.getElementById('confirmModalOverlay');
+      if (overlay) overlay.style.display = 'flex';
+    }
+
+    function closeOrderConfirmModal() {
+      const overlay = document.getElementById('confirmModalOverlay');
+      if (overlay) overlay.style.display = 'none';
+    }
+
+    function handleConfirmOrderSubmit() {
+      const btn = document.getElementById('btnConfirmModalSubmit');
+      const txt = document.getElementById('modalSubmitText');
+      if (btn) btn.disabled = true;
+      if (txt) txt.innerHTML = '<span class="spinner"></span> Đang tạo đơn...';
+
+      const prefix = VIETQR_CONFIG.ORDER_PREFIX || 'SMSNLinh';
+      const orderCode = prefix + Math.floor(100000 + Math.random() * 900000);
+      appState.orderCode = orderCode;
+
+      const orderPayload = {
+        orderCode: orderCode,
+        shopeeUrl: appState.shopeeUrl,
+        productName: appState.productName || 'Sản phẩm Shopee',
+        variationWithQty: appState.variationWithQty,
+        selectedVariation: appState.variationWithQty,
+        quantity: 1,
+        phoneChoice: appState.phoneChoice,
+        recipientPhone: appState.recipientPhone,
+        recipientName: appState.recipientName,
+        recipientAddress: appState.recipientAddress,
+        zaloPhone: appState.zaloPhone,
+        referralCode: appState.referralCode || '',
+        finalTotal: 40000,
+        orderStatus: 'Chờ lên đơn'
+      };
+
+      if (typeof google !== 'undefined' && google.script && google.script.run) {
+        google.script.run
+          .withSuccessHandler(function(res) {
+            if (btn) btn.disabled = false;
+            if (txt) txt.innerHTML = 'Xác nhận đặt hàng <i class="fa-solid fa-check"></i>';
+            closeOrderConfirmModal();
+            appState.orderSubmitted = true;
+            goToStep3();
+          })
+          .withFailureHandler(function(err) {
+            if (btn) btn.disabled = false;
+            if (txt) txt.innerHTML = 'Xác nhận đặt hàng <i class="fa-solid fa-check"></i>';
+            alert('Lỗi lưu đơn hàng: ' + (err ? err.message : ''));
+            closeOrderConfirmModal();
+            appState.orderSubmitted = true;
+            goToStep3();
+          })
+          .submitOrder(orderPayload);
+      } else {
+        setTimeout(() => {
+          if (btn) btn.disabled = false;
+          if (txt) txt.innerHTML = 'Xác nhận đặt hàng <i class="fa-solid fa-check"></i>';
+          closeOrderConfirmModal();
+          appState.orderSubmitted = true;
+          goToStep3();
+        }, 400);
+      }
+    }
+
+    // ==================== TRANG THỨ 3: THANH TOÁN VIETQR ====================
+    function renderStep3Payment() {
+      const finalTotal = 40000;
+      appState.finalTotal = finalTotal;
+
+      const qrBox = document.getElementById('vietqrBox');
+      if (qrBox) qrBox.style.display = 'block';
+
+      const bankId = VIETQR_CONFIG.BANK_ID || 'MBBank';
+      const accountNo = VIETQR_CONFIG.ACCOUNT_NO || '0868651119';
+      const template = VIETQR_CONFIG.TEMPLATE || 'compact';
+      const accountName = encodeURIComponent(VIETQR_CONFIG.ACCOUNT_NAME || 'PHAM THI MY LINH');
+      const orderCode = appState.orderCode || 'SMSNLinh';
+      const qrUrl = "https://vietqr.app/img?bank=" + bankId + 
+                    "&acc=" + accountNo + 
+                    "&template=" + template + 
+                    "&amount=" + finalTotal + 
+                    "&des=" + encodeURIComponent(orderCode) + 
+                    "&showinfo=false" + 
+                    "&holder=" + accountName;
+      
+      const qrImg = document.getElementById('vietqrImg');
+      if (qrImg) qrImg.src = qrUrl;
+
+      // Cập nhật bảng thông tin chuyển khoản
+      const bName = document.getElementById('bankNameDisplay');
+      if (bName) bName.innerText = 'MBBank (MB)';
+      const bAccNo = document.getElementById('bankAccountNo');
+      if (bAccNo) bAccNo.innerText = '0868***119';
+      const bAccName = document.getElementById('bankAccountName');
+      if (bAccName) bAccName.innerText = VIETQR_CONFIG.ACCOUNT_NAME;
+      const bAmt = document.getElementById('bankAmount');
+      if (bAmt) bAmt.innerText = formatVND(finalTotal);
+      const bCode = document.getElementById('bankOrderCode');
+      if (bCode) bCode.innerText = orderCode;
+
+      // Bắt đầu tự động kiểm tra nhận tiền mỗi 2.5s
+      startAutoPaymentPolling();
+    }
+
+    function startAutoPaymentPolling() {
+      if (appState.pollIntervalId) clearInterval(appState.pollIntervalId);
+
+      appState.pollIntervalId = setInterval(() => {
+        if (!appState.orderCode) return;
+
+        if (typeof google !== 'undefined' && google.script && google.script.run) {
+          google.script.run
+            .withSuccessHandler(function(res) {
+              if (res && res.paid) {
+                clearInterval(appState.pollIntervalId);
+                appState.pollIntervalId = null;
+                showSuccessScreen();
+              }
+            })
+            .checkPaymentStatus(appState.orderCode);
+        }
+      }, 2500);
+    }
+
+    function manualCheckPayment() {
+      const btn = document.getElementById('btnManualCheckPay');
+      const msg = document.getElementById('checkPayMsg');
+      if (btn) btn.disabled = true;
+      if (btn) btn.innerHTML = '<span class="spinner"></span> Đang kiểm tra...';
+      if (msg) {
+        msg.style.display = 'block';
+        msg.style.color = '#0284C7';
+        msg.innerText = 'Đang đồng bộ giao dịch ngân hàng...';
+      }
+
+      if (typeof google !== 'undefined' && google.script && google.script.run) {
+        google.script.run
+          .withSuccessHandler(function(res) {
+            if (btn) btn.disabled = false;
+            if (btn) btn.innerHTML = '<i class="fa-solid fa-arrows-rotate"></i> Kiểm tra giao dịch';
+            if (res && res.paid) {
+              if (msg) msg.style.display = 'none';
+              showSuccessScreen();
+            } else {
+              if (msg) {
+                msg.style.display = 'block';
+                msg.style.color = '#D97706';
+                msg.innerText = 'Chưa nhận diện được giao dịch. Vui lòng đợi 5-10 giây để ngân hàng chuyển tiếp rồi bấm lại nhé!';
+              }
+            }
+          })
+          .withFailureHandler(function(err) {
+            if (btn) btn.disabled = false;
+            if (btn) btn.innerHTML = '<i class="fa-solid fa-arrows-rotate"></i> Kiểm tra giao dịch';
+            if (msg) {
+              msg.style.display = 'block';
+              msg.style.color = '#EF4444';
+              msg.innerText = 'Lỗi kết nối kiểm tra: ' + (err ? err.message : '');
+            }
+          })
+          .checkPaymentStatus(appState.orderCode);
+      } else {
+        setTimeout(() => {
+          if (btn) btn.disabled = false;
+          if (btn) btn.innerHTML = '<i class="fa-solid fa-arrows-rotate"></i> Kiểm tra giao dịch';
+          showSuccessScreen();
+        }, 800);
+      }
+    }
+
+    function showSuccessScreen() {
+      const s3 = document.getElementById('step3Card');
+      if (s3) s3.style.display = 'none';
+      const sc = document.getElementById('successScreen');
+      if (sc) sc.style.display = 'block';
+
+      const elCode = document.getElementById('finalOrderCode');
+      if (elCode) elCode.innerText = appState.orderCode;
+      const elName = document.getElementById('finalRecipientName');
+      if (elName) elName.innerText = appState.recipientName;
+      const elPhone = document.getElementById('finalRecipientPhone');
+      if (elPhone) elPhone.innerText = appState.recipientPhone;
+      const elZalo = document.getElementById('finalZaloPhone');
+      if (elZalo) elZalo.innerText = appState.zaloPhone;
+      const elZaloTxt = document.getElementById('successZaloTxt');
+      if (elZaloTxt) elZaloTxt.innerText = appState.zaloPhone;
+      const elAddr = document.getElementById('finalRecipientAddress');
+      if (elAddr) elAddr.innerText = appState.recipientAddress;
+      const elProd = document.getElementById('finalProductName');
+      if (elProd) elProd.innerText = appState.productName || 'Sản phẩm Shopee';
+      const elVar = document.getElementById('finalVariationQty');
+      if (elVar) elVar.innerText = appState.variationWithQty || 'Tiêu chuẩn';
+      const elAmt = document.getElementById('finalPaidAmount');
+      if (elAmt) elAmt.innerText = formatVND(40000);
+
+      const elRefRow = document.getElementById('finalRefRow');
+      const elRef = document.getElementById('finalReferralCode');
+      if (appState.referralCode) {
+        if (elRefRow) elRefRow.style.display = 'flex';
+        if (elRef) elRef.innerText = appState.referralCode;
+      } else {
+        if (elRefRow) elRefRow.style.display = 'none';
+      }
+
+      for (let i = 1; i <= 3; i++) {
+        const node = document.getElementById('stepNode' + i);
+        if (node) node.className = 'step-node done';
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ==================== TIỆN ÍCH COPY & FORMAT ====================
+    function copyAccountNo(btnEl) {
+      const realAcc = (VIETQR_CONFIG && VIETQR_CONFIG.ACCOUNT_NO) ? VIETQR_CONFIG.ACCOUNT_NO : "0868651119";
+      navigator.clipboard.writeText(realAcc).then(() => {
+        const origHtml = btnEl.innerHTML;
+        btnEl.classList.add('copied');
+        btnEl.innerHTML = '<i class="fa-solid fa-check"></i> Đã chép';
+        setTimeout(() => {
+          btnEl.classList.remove('copied');
+          btnEl.innerHTML = origHtml;
+        }, 1800);
+      });
+    }
+
+    function copyToClipboard(elementId, btnEl) {
+      const text = document.getElementById(elementId).innerText.trim();
+      navigator.clipboard.writeText(text).then(() => {
+        const origHtml = btnEl.innerHTML;
+        btnEl.classList.add('copied');
+        btnEl.innerHTML = '<i class="fa-solid fa-check"></i> Đã chép';
+        setTimeout(() => {
+          btnEl.classList.remove('copied');
+          btnEl.innerHTML = origHtml;
+        }, 1800);
+      });
+    }
+
+    function copyRawAmount(btnEl) {
+      const amountStr = "40000";
+      navigator.clipboard.writeText(amountStr).then(() => {
+        const origHtml = btnEl.innerHTML;
+        btnEl.classList.add('copied');
+        btnEl.innerHTML = '<i class="fa-solid fa-check"></i> Đã chép';
+        setTimeout(() => {
+          btnEl.classList.remove('copied');
+          btnEl.innerHTML = origHtml;
+        }, 1800);
+      });
+    }
+
+    function formatVND(num) {
+      return (Number(num) || 0).toLocaleString('vi-VN') + ' ₫';
+    }
+
+    function resetToNewOrder() {
+      appState.shopeeUrl = '';
+      appState.productName = '';
+      appState.productImage = '';
+      appState.variationWithQty = '';
+      appState.orderCode = '';
+      appState.referralCode = '';
+      appState.orderSubmitted = false;
+
+      const refEl = document.getElementById('referralCode');
+      if (refEl) refEl.value = '';
+
+      if (appState.pollIntervalId) {
+        clearInterval(appState.pollIntervalId);
+        appState.pollIntervalId = null;
+      }
+
+      const urlEl = document.getElementById('shopeeUrl');
+      if (urlEl) urlEl.value = '';
+      const varEl = document.getElementById('variationQuantityInput');
+      if (varEl) varEl.value = '';
+      const pdp = document.getElementById('pdpBox');
+      if (pdp) pdp.style.display = 'none';
+      const pdpTitle = document.getElementById('pdpProductTitle');
+      if (pdpTitle) pdpTitle.innerText = '';
+      const pdpImg = document.getElementById('pdpMainImg');
+      if (pdpImg) pdpImg.src = '';
+
+      goToStep1();
+    }
+
+    // Tự động nhận mã giới thiệu từ link nếu có (ví dụ: ?ref=ABCXYZ hoặc ?gt=ABCXYZ)
+    document.addEventListener('DOMContentLoaded', function() {
+      try {
+        const urlParams = new URLSearchParams(window.location.search);
+        const refParam = urlParams.get('ref') || urlParams.get('gt') || urlParams.get('gioithieu');
+        if (refParam) {
+          const refInput = document.getElementById('referralCode');
+          if (refInput) {
+            refInput.value = refParam.trim();
+            appState.referralCode = refParam.trim();
+          }
+        }
+      } catch(eRef) {}
+    });
   </script>
 </body>
 </html>
