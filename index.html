@@ -3,300 +3,115 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Hệ Thống Đặt Hộ Đơn & Tra Cứu Vận Đơn Shopee - ma100.xyz</title>
+  <title>Hệ Thống Đặt Đơn Hộ Shopee - Săn Voucher 100K</title>
 
-  <!-- Tối ưu tốc độ: Bắt tay DNS & SSL với các máy chủ -->
+  <!-- Tối ưu tốc độ: Bắt tay DNS & SSL với máy chủ Google Apps Script trước -->
   <link rel="preconnect" href="https://script.google.com" crossorigin>
   <link rel="preconnect" href="https://script.googleusercontent.com" crossorigin>
   <link rel="dns-prefetch" href="https://script.google.com">
+  <link rel="dns-prefetch" href="https://script.googleusercontent.com">
 
-  <!-- Favicon -->
-  <link rel="icon" href="https://deo.shopeemobile.com/chem/desktop/vi/favicon.ico" type="image/x-icon">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <!-- Favicon đã nén siêu nhẹ -->
+  <link rel="icon" href="https://files.catbox.moe/reu1gz.png" type="image/png">
+  <link rel="apple-touch-icon" href="https://files.catbox.moe/reu1gz.png">
+
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="Hệ Thống Đặt Đơn Hộ Shopee - Săn Voucher 100K">
+  <meta name="description" content="Hỗ trợ săn voucher giảm giá 100.000đ, đặt hàng Shopee nhanh chóng, an toàn và thanh toán tự động qua VietQR.">
+
+  <!-- Open Graph / Facebook / Zalo / Messenger -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ma100.xyz/">
+  <meta property="og:title" content="Hệ Thống Đặt Đơn Hộ Shopee - Săn Voucher 100K">
+  <meta property="og:description" content="Hỗ trợ săn voucher giảm giá 100.000đ, đặt hàng Shopee nhanh chóng, an toàn và thanh toán tự động qua VietQR.">
+  <meta property="og:image" content="https://files.catbox.moe/pr2jg1.jpg">
+  <meta property="og:image:secure_url" content="https://files.catbox.moe/pr2jg1.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1024">
+  <meta property="og:image:height" content="571">
+  <meta property="og:image:alt" content="Hệ Thống Đặt Đơn Hộ Shopee - Săn Voucher 100K">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://ma100.xyz/">
+  <meta property="twitter:title" content="Hệ Thống Đặt Đơn Hộ Shopee - Săn Voucher 100K">
+  <meta property="twitter:description" content="Hỗ trợ săn voucher giảm giá 100.000đ, đặt hàng Shopee nhanh chóng, an toàn và thanh toán tự động qua VietQR.">
+  <meta property="twitter:image" content="https://files.catbox.moe/pr2jg1.jpg">
 
   <style>
-    :root {
-      --primary: #ee4d2d;
-      --nav-height: 58px;
-      --content-gap: 16px;
-      --bg-color: #f8fafc;
-    }
-
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      -webkit-tap-highlight-color: transparent;
     }
-
     html, body {
       width: 100%;
       height: 100%;
       overflow: hidden;
-      background-color: var(--bg-color);
+      background-color: #F8FAFC;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
 
-    /* ============================================================
-       THANH ĐIỀU HƯỚNG 2 MỤC ĐẦU TRANG - TRÊN CÙNG
-       ============================================================ */
-    .top-nav-bar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: var(--nav-height);
-      background: var(--bg-color) !important;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 999999;
-      padding: 0 12px;
-    }
-
-    .nav-pill-box {
-      width: 100%;
-      max-width: 480px;
-      height: 44px;
-      background: #ffffff;
-      border-radius: 24px;
-      display: flex;
-      padding: 3px;
-      position: relative;
-      border: 1px solid #e2e8f0;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    }
-
-    .nav-tab-btn {
-      flex: 1;
-      height: 100%;
-      border: none;
-      background: transparent;
-      color: #64748b;
-      font-size: 13.5px;
-      font-weight: 800;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 7px;
-      border-radius: 20px;
-      position: relative;
-      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-      letter-spacing: 0.2px;
-      user-select: none;
-      touch-action: manipulation;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .nav-tab-btn * {
-      pointer-events: none;
-    }
-
-    .nav-tab-btn i {
-      font-size: 15px;
-      transition: transform 0.2s;
-    }
-
-    /* KHI TAB ĐƯỢC CHỌN (ACTIVE) */
-    .nav-tab-btn.active {
-      color: #ffffff !important;
-    }
-
-    #tab-order.active {
-      background: linear-gradient(135deg, #ee4d2d, #ff5722);
-      box-shadow: 0 4px 14px rgba(238, 77, 45, 0.38);
-    }
-
-    #tab-tracking.active {
-      background: linear-gradient(135deg, #2563eb, #1d4ed8);
-      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.38);
-    }
-
-    .nav-tab-btn.active i {
-      transform: scale(1.1);
-      color: #ffffff !important;
-    }
-
-    /* KHI CHƯA CHỌN (HOVER) */
-    .nav-tab-btn:not(.active):hover {
-      color: #0f172a;
-      background: #e2e8f0;
-    }
-
-    /* ============================================================
-       HIỆU ỨNG ĐỘNG CHO 2 TAB ĐỂ THU HÚT SỰ CHÚ Ý CỦA KHÁCH
-       ============================================================ */
-    .truck-icon-anim {
-      display: inline-block;
-      animation: driveTruck 2.2s infinite ease-in-out;
-      color: #2563eb;
-    }
-
-    @keyframes driveTruck {
-      0%, 100% { transform: translateY(0); }
-      20% { transform: translateY(-3px) rotate(-3deg); }
-      40% { transform: translateY(1px) rotate(1deg); }
-      60% { transform: translateY(-2px); }
-      80% { transform: translateY(0); }
-    }
-
-    .cart-bounce-anim {
-      display: inline-block;
-      animation: cartWiggle 1.8s infinite ease-in-out;
-      color: #ee4d2d !important;
-    }
-
-    @keyframes cartWiggle {
-      0%, 100% { transform: rotate(0deg) scale(1); }
-      15% { transform: rotate(-12deg) scale(1.18); }
-      30% { transform: rotate(10deg) scale(1.18); }
-      45% { transform: rotate(-8deg); }
-      60% { transform: rotate(4deg); }
-      75% { transform: rotate(0deg); }
-    }
-
-    /* Badge phát sáng nhấp nháy (HOT / GIẢM 100K) */
-    .badge-pulse {
-      position: absolute;
-      top: -6px;
-      right: 8px;
-      color: #ffffff;
-      font-size: 9px;
-      font-weight: 900;
-      padding: 1px 6px;
-      border-radius: 10px;
-      letter-spacing: 0.5px;
-      animation: pulseGlow 1.8s infinite;
-      pointer-events: none;
-    }
-
-    .badge-tracking {
-      background: #2563eb;
-      box-shadow: 0 2px 6px rgba(37, 99, 235, 0.45);
-    }
-
-    .badge-order {
-      background: #ee4d2d;
-      box-shadow: 0 2px 6px rgba(238, 77, 45, 0.45);
-    }
-
-    @keyframes pulseGlow {
-      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(238, 77, 45, 0.6); }
-      70% { transform: scale(1.08); box-shadow: 0 0 0 7px rgba(238, 77, 45, 0); }
-      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(238, 77, 45, 0); }
-    }
-
-    /* ============================================================
-       KHUNG HIỂN THỊ NỘI DUNG (GIỮ TRẠNG THÁI TRONG BỘ NHỚ CHO MOBILE)
-       ============================================================ */
-    .app-viewport {
-      position: fixed;
-      top: calc(var(--nav-height) + var(--content-gap));
-      left: 0;
-      width: 100%;
-      height: calc(100% - var(--nav-height) - var(--content-gap));
-      overflow: hidden;
-      background: #f8fafc;
-    }
-
-    .app-frame-wrap {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      visibility: hidden;
-      opacity: 0;
-      pointer-events: none;
-      z-index: 1;
-      background: #f8fafc;
-      transition: opacity 0.15s ease;
-    }
-
-    .app-frame-wrap.active {
-      visibility: visible;
-      opacity: 1;
-      pointer-events: auto;
-      z-index: 2;
-    }
-
-    iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-      display: block;
-      background: #f8fafc;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    /* MÀN HÌNH CHỜ BAN ĐẦU */
+    /* Màn hình tải trang siêu nhanh (0.01s hiển thị ngay, không bị màn hình trắng) */
     #page-loader {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: #ffffff;
+      background: #FFFFFF;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       z-index: 9999;
-      transition: opacity 0.3s ease, visibility 0.3s ease;
+      transition: opacity 0.35s ease, visibility 0.35s ease;
     }
-
     #page-loader.hidden {
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
     }
-
     .loader-icon {
-      width: 62px;
-      height: 62px;
-      border-radius: 18px;
-      background: linear-gradient(135deg, #ee4d2d, #ff6842);
+      width: 68px;
+      height: 68px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #EE4D2D, #FF6842);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #ffffff;
-      font-size: 28px;
+      color: #FFFFFF;
+      font-size: 32px;
       box-shadow: 0 10px 25px rgba(238, 77, 45, 0.3);
-      animation: pulse 1.5s infinite ease-in-out;
+      animation: pulse 1.6s infinite ease-in-out;
     }
-
     .loader-title {
-      margin-top: 15px;
+      margin-top: 18px;
       font-size: 16px;
       font-weight: 700;
-      color: #0f172a;
+      color: #0F172A;
     }
-
     .loader-sub {
-      margin-top: 5px;
+      margin-top: 6px;
       font-size: 13px;
-      color: #64748b;
+      color: #64748B;
     }
-
     .loader-bar-wrap {
-      width: 140px;
+      width: 160px;
       height: 4px;
-      background: #e2e8f0;
+      background: #E2E8F0;
       border-radius: 10px;
-      margin-top: 16px;
+      margin-top: 20px;
       overflow: hidden;
       position: relative;
     }
-
     .loader-bar {
       position: absolute;
       top: 0;
       left: 0;
       height: 100%;
       width: 40%;
-      background: #ee4d2d;
+      background: #EE4D2D;
       border-radius: 10px;
       animation: loading 1.2s infinite ease-in-out;
     }
@@ -311,152 +126,71 @@
       100% { left: 100%; width: 40%; }
     }
 
-    @media (max-width: 480px) {
-      :root {
-        --nav-height: 52px;
-        --content-gap: 4px;
-      }
-      .top-nav-bar {
-        padding: 0 8px;
-      }
-      .nav-pill-box {
-        height: 40px;
-        padding: 2.5px;
-      }
-      .nav-tab-btn {
-        font-size: 12px;
-        gap: 5px;
-      }
-      .badge-pulse {
-        font-size: 8px;
-        padding: 1px 5px;
-        top: -5px;
-        right: 4px;
-      }
+    /* Khung iframe chứa ứng dụng Google Apps Script */
+    .app-frame-wrap {
+      position: fixed;
+      top: -46px; /* Ẩn thanh cảnh báo trên cùng của Google */
+      left: 0;
+      width: 100%;
+      height: calc(100% + 46px);
+      overflow: hidden;
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+      background: #F8FAFC;
     }
   </style>
 </head>
 <body>
-
+  <!-- Màn hình chờ siêu mượt giúp người dùng không thấy màn hình trắng -->
   <div id="page-loader">
     <div class="loader-icon">🛍️</div>
-    <div class="loader-title">Hệ Thống Dịch Vụ Shopee</div>
-    <div class="loader-sub">Đang khởi tạo kết nối...</div>
+    <div class="loader-title">Hệ Thống Đặt Đơn Hộ Shopee</div>
+    <div class="loader-sub">Đang kết nối hệ thống tốc độ cao...</div>
     <div class="loader-bar-wrap">
       <div class="loader-bar"></div>
     </div>
   </div>
 
-  <!-- THANH ĐIỀU HƯỚNG 2 MỤC ĐẦU TRANG (VỊ TRÍ CŨ TRÊN CÙNG) -->
-  <header class="top-nav-bar">
-    <div class="nav-pill-box">
-      <!-- 1. Nút Đặt Hộ Đơn -->
-      <button class="nav-tab-btn active" id="tab-order" onclick="switchTab('order')">
-        <i class="fa-solid fa-cart-shopping" id="cart-icon"></i>
-        <span>ĐẶT HỘ ĐƠN</span>
-        <span class="badge-pulse badge-order" id="badge-order" style="display: none;">GIẢM 100K</span>
-      </button>
-
-      <!-- 2. Nút Tra Cứu Đơn Hàng -->
-      <button class="nav-tab-btn" id="tab-tracking" onclick="switchTab('tracking')">
-        <i class="fa-solid fa-truck-fast truck-icon-anim" id="truck-icon"></i>
-        <span>TRA CỨU ĐƠN HÀNG</span>
-        <span class="badge-pulse badge-tracking" id="badge-tracking">HOT</span>
-      </button>
-    </div>
-  </header>
-
-  <!-- KHUNG HIỂN THỊ CÁC WEB APP -->
-  <main class="app-viewport">
-    <!-- 1. Web App Đặt Đơn Mặc Định -->
-    <div class="app-frame-wrap active" id="wrap-order">
-      <iframe 
-        id="frame-order"
-        src="https://script.google.com/macros/s/AKfycbx5dYh2nejqU5YDwvDGxzmutTai0NPg7B55Bn9U2yOC7Q4RqHL9WH8tICrqI-3-RdIi/exec" 
-        allow="clipboard-write; clipboard-read"
-        loading="eager"
-        onload="hideLoader()">
-      </iframe>
-    </div>
-
-    <!-- 2. Web App Tra Cứu Đơn Hàng (Link Apps Script Thật) -->
-    <div class="app-frame-wrap" id="wrap-tracking">
-      <iframe 
-        id="frame-tracking"
-        src="https://script.google.com/macros/s/AKfycbzPi0dI6GMkcRrEsyJ8aqlCmSKkXW3X7Z-GEJQlfxNUTeH5dwFDc36vqOrb2C9TZ08e/exec" 
-        allow="clipboard-write; clipboard-read"
-        loading="eager">
-      </iframe>
-    </div>
-  </main>
+  <div class="app-frame-wrap">
+    <!-- Bỏ loading="lazy" và thêm sự kiện onload để ẩn màn hình chờ ngay khi web tải xong -->
+    <iframe 
+      id="main-app-frame"
+      src="https://script.google.com/macros/s/AKfycbx5dYh2nejqU5YDwvDGxzmutTai0NPg7B55Bn9U2yOC7Q4RqHL9WH8tICrqI-3-RdIi/exec" 
+      allow="clipboard-write; clipboard-read"
+      loading="eager"
+      onload="hidePageLoader()">
+    </iframe>
+  </div>
 
   <script>
-    function hideLoader() {
+    // Tự động truyền query param (như ?ref=...) từ ma100.xyz vào iframe Google Apps Script
+    (function forwardQueryParams() {
+      try {
+        if (window.location.search) {
+          const iframe = document.getElementById('main-app-frame');
+          if (iframe) {
+            const baseSrc = "https://script.google.com/macros/s/AKfycbx5dYh2nejqU5YDwvDGxzmutTai0NPg7B55Bn9U2yOC7Q4RqHL9WH8tICrqI-3-RdIi/exec";
+            iframe.src = baseSrc + window.location.search;
+          }
+        }
+      } catch (e) {}
+    })();
+
+    // Ẩn màn hình chờ mượt mà khi iframe đã sẵn sàng
+    function hidePageLoader() {
       const loader = document.getElementById('page-loader');
       if (loader) {
         loader.classList.add('hidden');
-        setTimeout(() => { loader.style.display = 'none'; }, 350);
-      }
-    }
-    setTimeout(hideLoader, 5000);
-
-    // Chuyển đổi tab thông minh với hiệu ứng động qua lại
-    function switchTab(tabName) {
-      const tabOrder = document.getElementById('tab-order');
-      const tabTracking = document.getElementById('tab-tracking');
-      const wrapOrder = document.getElementById('wrap-order');
-      const wrapTracking = document.getElementById('wrap-tracking');
-      const cartIcon = document.getElementById('cart-icon');
-      const truckIcon = document.getElementById('truck-icon');
-      const badgeOrder = document.getElementById('badge-order');
-      const badgeTracking = document.getElementById('badge-tracking');
-
-      if (tabName === 'order') {
-        // Active Đặt Hộ Đơn
-        tabOrder.classList.add('active');
-        tabTracking.classList.remove('active');
-        wrapOrder.classList.add('active');
-        wrapTracking.classList.remove('active');
-
-        // Bật hiệu ứng động bên Tra Cứu, tắt bên Đặt Đơn
-        cartIcon.classList.remove('cart-bounce-anim');
-        badgeOrder.style.display = 'none';
-
-        truckIcon.classList.add('truck-icon-anim');
-        badgeTracking.style.display = 'inline-block';
-      } else if (tabName === 'tracking') {
-        // Active Tra Cứu Đơn Hàng
-        tabTracking.classList.add('active');
-        tabOrder.classList.remove('active');
-        wrapTracking.classList.add('active');
-        wrapOrder.classList.remove('active');
-
-        // BẬT HIỆU ỨNG ĐỘNG THU HÚT BÊN ĐẶT ĐƠN HỘ (Giỏ hàng rung rinh + Badge GIẢM 100K)
-        truckIcon.classList.remove('truck-icon-anim');
-        badgeTracking.style.display = 'none';
-
-        cartIcon.classList.add('cart-bounce-anim');
-        badgeOrder.style.display = 'inline-block';
+        setTimeout(() => { loader.style.display = 'none'; }, 400);
       }
     }
 
-    // Hỗ trợ cảm ứng chạm tức thì (Zero-delay) trên màn hình điện thoại
-    ['tab-order', 'tab-tracking'].forEach(function(id) {
-      const el = document.getElementById(id);
-      if (el) {
-        el.addEventListener('touchend', function(e) {
-          e.preventDefault();
-          switchTab(id === 'tab-order' ? 'order' : 'tracking');
-        }, { passive: false });
-      }
-    });
-
-    // Lắng nghe sự kiện chuyển tab từ web con (khi khách bấm nút ĐẶT ĐƠN HỘ)
-    window.addEventListener('message', function(event) {
-      if (event.data && event.data.action === 'switchTab') {
-        switchTab(event.data.tab);
-      }
-    });
+    // Cơ chế an toàn: Tự ẩn sau 6 giây phòng trường hợp mạng chập chờn
+    setTimeout(hidePageLoader, 6000);
   </script>
 </body>
 </html>
